@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.BusinessorderMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.Businessorder" >
+    <id column="BOrderID" property="borderid" jdbcType="INTEGER" />
+    <result column="BOrderTNmame" property="bordertnmame" jdbcType="NVARCHAR" />
+    <result column="XH1" property="xh1" jdbcType="NVARCHAR" />
+    <result column="XH2" property="xh2" jdbcType="NVARCHAR" />
+    <result column="XH3" property="xh3" jdbcType="NVARCHAR" />
+    <result column="XH4" property="xh4" jdbcType="NVARCHAR" />
+    <result column="XH5" property="xh5" jdbcType="NVARCHAR" />
+    <result column="XH6" property="xh6" jdbcType="TIMESTAMP" />
+    <result column="XH7" property="xh7" jdbcType="NVARCHAR" />
+    <result column="XH8" property="xh8" jdbcType="NVARCHAR" />
+    <result column="XH9" property="xh9" jdbcType="NVARCHAR" />
+    <result column="XH10" property="xh10" jdbcType="NVARCHAR" />
+    <result column="XH11" property="xh11" jdbcType="NVARCHAR" />
+    <result column="XH12" property="xh12" jdbcType="NVARCHAR" />
+    <result column="XHDate" property="xhdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BOrderID, BOrderTNmame, XH1, XH2, XH3, XH4, XH5, XH6, XH7, XH8, XH9, XH10, XH11, 
+    XH12, XHDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.BusinessorderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.BusinessOrder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.BusinessOrder
+    where BOrderID = #{borderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.BusinessOrder
+    where BOrderID = #{borderid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.BusinessorderExample" >
+    delete from dbo.BusinessOrder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.Businessorder" >
+    insert into dbo.BusinessOrder (BOrderID, BOrderTNmame, XH1, 
+      XH2, XH3, XH4, XH5, 
+      XH6, XH7, XH8, 
+      XH9, XH10, XH11, 
+      XH12, XHDate)
+    values (#{borderid,jdbcType=INTEGER}, #{bordertnmame,jdbcType=NVARCHAR}, #{xh1,jdbcType=NVARCHAR}, 
+      #{xh2,jdbcType=NVARCHAR}, #{xh3,jdbcType=NVARCHAR}, #{xh4,jdbcType=NVARCHAR}, #{xh5,jdbcType=NVARCHAR}, 
+      #{xh6,jdbcType=TIMESTAMP}, #{xh7,jdbcType=NVARCHAR}, #{xh8,jdbcType=NVARCHAR}, 
+      #{xh9,jdbcType=NVARCHAR}, #{xh10,jdbcType=NVARCHAR}, #{xh11,jdbcType=NVARCHAR}, 
+      #{xh12,jdbcType=NVARCHAR}, #{xhdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.Businessorder" >
+    insert into dbo.BusinessOrder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="borderid != null" >
+        BOrderID,
+      </if>
+      <if test="bordertnmame != null" >
+        BOrderTNmame,
+      </if>
+      <if test="xh1 != null" >
+        XH1,
+      </if>
+      <if test="xh2 != null" >
+        XH2,
+      </if>
+      <if test="xh3 != null" >
+        XH3,
+      </if>
+      <if test="xh4 != null" >
+        XH4,
+      </if>
+      <if test="xh5 != null" >
+        XH5,
+      </if>
+      <if test="xh6 != null" >
+        XH6,
+      </if>
+      <if test="xh7 != null" >
+        XH7,
+      </if>
+      <if test="xh8 != null" >
+        XH8,
+      </if>
+      <if test="xh9 != null" >
+        XH9,
+      </if>
+      <if test="xh10 != null" >
+        XH10,
+      </if>
+      <if test="xh11 != null" >
+        XH11,
+      </if>
+      <if test="xh12 != null" >
+        XH12,
+      </if>
+      <if test="xhdate != null" >
+        XHDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="borderid != null" >
+        #{borderid,jdbcType=INTEGER},
+      </if>
+      <if test="bordertnmame != null" >
+        #{bordertnmame,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh1 != null" >
+        #{xh1,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh2 != null" >
+        #{xh2,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh3 != null" >
+        #{xh3,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh4 != null" >
+        #{xh4,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh5 != null" >
+        #{xh5,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh6 != null" >
+        #{xh6,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh7 != null" >
+        #{xh7,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh8 != null" >
+        #{xh8,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh9 != null" >
+        #{xh9,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh10 != null" >
+        #{xh10,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh11 != null" >
+        #{xh11,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh12 != null" >
+        #{xh12,jdbcType=NVARCHAR},
+      </if>
+      <if test="xhdate != null" >
+        #{xhdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.BusinessorderExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.BusinessOrder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.BusinessOrder
+    <set >
+      <if test="record.borderid != null" >
+        BOrderID = #{record.borderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bordertnmame != null" >
+        BOrderTNmame = #{record.bordertnmame,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh1 != null" >
+        XH1 = #{record.xh1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh2 != null" >
+        XH2 = #{record.xh2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh3 != null" >
+        XH3 = #{record.xh3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh4 != null" >
+        XH4 = #{record.xh4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh5 != null" >
+        XH5 = #{record.xh5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh6 != null" >
+        XH6 = #{record.xh6,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.xh7 != null" >
+        XH7 = #{record.xh7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh8 != null" >
+        XH8 = #{record.xh8,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh9 != null" >
+        XH9 = #{record.xh9,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh10 != null" >
+        XH10 = #{record.xh10,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh11 != null" >
+        XH11 = #{record.xh11,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xh12 != null" >
+        XH12 = #{record.xh12,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xhdate != null" >
+        XHDate = #{record.xhdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.BusinessOrder
+    set BOrderID = #{record.borderid,jdbcType=INTEGER},
+      BOrderTNmame = #{record.bordertnmame,jdbcType=NVARCHAR},
+      XH1 = #{record.xh1,jdbcType=NVARCHAR},
+      XH2 = #{record.xh2,jdbcType=NVARCHAR},
+      XH3 = #{record.xh3,jdbcType=NVARCHAR},
+      XH4 = #{record.xh4,jdbcType=NVARCHAR},
+      XH5 = #{record.xh5,jdbcType=NVARCHAR},
+      XH6 = #{record.xh6,jdbcType=TIMESTAMP},
+      XH7 = #{record.xh7,jdbcType=NVARCHAR},
+      XH8 = #{record.xh8,jdbcType=NVARCHAR},
+      XH9 = #{record.xh9,jdbcType=NVARCHAR},
+      XH10 = #{record.xh10,jdbcType=NVARCHAR},
+      XH11 = #{record.xh11,jdbcType=NVARCHAR},
+      XH12 = #{record.xh12,jdbcType=NVARCHAR},
+      XHDate = #{record.xhdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.Businessorder" >
+    update dbo.BusinessOrder
+    <set >
+      <if test="bordertnmame != null" >
+        BOrderTNmame = #{bordertnmame,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh1 != null" >
+        XH1 = #{xh1,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh2 != null" >
+        XH2 = #{xh2,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh3 != null" >
+        XH3 = #{xh3,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh4 != null" >
+        XH4 = #{xh4,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh5 != null" >
+        XH5 = #{xh5,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh6 != null" >
+        XH6 = #{xh6,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xh7 != null" >
+        XH7 = #{xh7,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh8 != null" >
+        XH8 = #{xh8,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh9 != null" >
+        XH9 = #{xh9,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh10 != null" >
+        XH10 = #{xh10,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh11 != null" >
+        XH11 = #{xh11,jdbcType=NVARCHAR},
+      </if>
+      <if test="xh12 != null" >
+        XH12 = #{xh12,jdbcType=NVARCHAR},
+      </if>
+      <if test="xhdate != null" >
+        XHDate = #{xhdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BOrderID = #{borderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.Businessorder" >
+    update dbo.BusinessOrder
+    set BOrderTNmame = #{bordertnmame,jdbcType=NVARCHAR},
+      XH1 = #{xh1,jdbcType=NVARCHAR},
+      XH2 = #{xh2,jdbcType=NVARCHAR},
+      XH3 = #{xh3,jdbcType=NVARCHAR},
+      XH4 = #{xh4,jdbcType=NVARCHAR},
+      XH5 = #{xh5,jdbcType=NVARCHAR},
+      XH6 = #{xh6,jdbcType=TIMESTAMP},
+      XH7 = #{xh7,jdbcType=NVARCHAR},
+      XH8 = #{xh8,jdbcType=NVARCHAR},
+      XH9 = #{xh9,jdbcType=NVARCHAR},
+      XH10 = #{xh10,jdbcType=NVARCHAR},
+      XH11 = #{xh11,jdbcType=NVARCHAR},
+      XH12 = #{xh12,jdbcType=NVARCHAR},
+      XHDate = #{xhdate,jdbcType=TIMESTAMP}
+    where BOrderID = #{borderid,jdbcType=INTEGER}
+  </update>
+</mapper>

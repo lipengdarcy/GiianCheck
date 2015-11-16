@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.SysNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.SysNews" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Title" property="title" jdbcType="NVARCHAR" />
+    <result column="TitleType" property="titletype" jdbcType="NVARCHAR" />
+    <result column="PicPath" property="picpath" jdbcType="NVARCHAR" />
+    <result column="Descrip" property="descrip" jdbcType="NVARCHAR" />
+    <result column="NewsContent" property="newscontent" jdbcType="NVARCHAR" />
+    <result column="IsTop" property="istop" jdbcType="INTEGER" />
+    <result column="AddTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="ShowTimes" property="showtimes" jdbcType="INTEGER" />
+    <result column="NewsType" property="newstype" jdbcType="NVARCHAR" />
+    <result column="TheAuthor" property="theauthor" jdbcType="NVARCHAR" />
+    <result column="Keywords" property="keywords" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Title, TitleType, PicPath, Descrip, NewsContent, IsTop, AddTime, ShowTimes, NewsType, 
+    TheAuthor, Keywords
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.SysNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.Sys_News
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.Sys_News
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.Sys_News
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.SysNewsExample" >
+    delete from dbo.Sys_News
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.SysNews" >
+    insert into dbo.Sys_News (ID, Title, TitleType, 
+      PicPath, Descrip, NewsContent, 
+      IsTop, AddTime, ShowTimes, 
+      NewsType, TheAuthor, Keywords
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=NVARCHAR}, #{titletype,jdbcType=NVARCHAR}, 
+      #{picpath,jdbcType=NVARCHAR}, #{descrip,jdbcType=NVARCHAR}, #{newscontent,jdbcType=NVARCHAR}, 
+      #{istop,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{showtimes,jdbcType=INTEGER}, 
+      #{newstype,jdbcType=NVARCHAR}, #{theauthor,jdbcType=NVARCHAR}, #{keywords,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.SysNews" >
+    insert into dbo.Sys_News
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="titletype != null" >
+        TitleType,
+      </if>
+      <if test="picpath != null" >
+        PicPath,
+      </if>
+      <if test="descrip != null" >
+        Descrip,
+      </if>
+      <if test="newscontent != null" >
+        NewsContent,
+      </if>
+      <if test="istop != null" >
+        IsTop,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="showtimes != null" >
+        ShowTimes,
+      </if>
+      <if test="newstype != null" >
+        NewsType,
+      </if>
+      <if test="theauthor != null" >
+        TheAuthor,
+      </if>
+      <if test="keywords != null" >
+        Keywords,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="titletype != null" >
+        #{titletype,jdbcType=NVARCHAR},
+      </if>
+      <if test="picpath != null" >
+        #{picpath,jdbcType=NVARCHAR},
+      </if>
+      <if test="descrip != null" >
+        #{descrip,jdbcType=NVARCHAR},
+      </if>
+      <if test="newscontent != null" >
+        #{newscontent,jdbcType=NVARCHAR},
+      </if>
+      <if test="istop != null" >
+        #{istop,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showtimes != null" >
+        #{showtimes,jdbcType=INTEGER},
+      </if>
+      <if test="newstype != null" >
+        #{newstype,jdbcType=NVARCHAR},
+      </if>
+      <if test="theauthor != null" >
+        #{theauthor,jdbcType=NVARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.SysNewsExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.Sys_News
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.Sys_News
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.titletype != null" >
+        TitleType = #{record.titletype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.picpath != null" >
+        PicPath = #{record.picpath,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.descrip != null" >
+        Descrip = #{record.descrip,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.newscontent != null" >
+        NewsContent = #{record.newscontent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.istop != null" >
+        IsTop = #{record.istop,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.showtimes != null" >
+        ShowTimes = #{record.showtimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.newstype != null" >
+        NewsType = #{record.newstype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.theauthor != null" >
+        TheAuthor = #{record.theauthor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        Keywords = #{record.keywords,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.Sys_News
+    set ID = #{record.id,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=NVARCHAR},
+      TitleType = #{record.titletype,jdbcType=NVARCHAR},
+      PicPath = #{record.picpath,jdbcType=NVARCHAR},
+      Descrip = #{record.descrip,jdbcType=NVARCHAR},
+      NewsContent = #{record.newscontent,jdbcType=NVARCHAR},
+      IsTop = #{record.istop,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      ShowTimes = #{record.showtimes,jdbcType=INTEGER},
+      NewsType = #{record.newstype,jdbcType=NVARCHAR},
+      TheAuthor = #{record.theauthor,jdbcType=NVARCHAR},
+      Keywords = #{record.keywords,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.SysNews" >
+    update dbo.Sys_News
+    <set >
+      <if test="title != null" >
+        Title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="titletype != null" >
+        TitleType = #{titletype,jdbcType=NVARCHAR},
+      </if>
+      <if test="picpath != null" >
+        PicPath = #{picpath,jdbcType=NVARCHAR},
+      </if>
+      <if test="descrip != null" >
+        Descrip = #{descrip,jdbcType=NVARCHAR},
+      </if>
+      <if test="newscontent != null" >
+        NewsContent = #{newscontent,jdbcType=NVARCHAR},
+      </if>
+      <if test="istop != null" >
+        IsTop = #{istop,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="showtimes != null" >
+        ShowTimes = #{showtimes,jdbcType=INTEGER},
+      </if>
+      <if test="newstype != null" >
+        NewsType = #{newstype,jdbcType=NVARCHAR},
+      </if>
+      <if test="theauthor != null" >
+        TheAuthor = #{theauthor,jdbcType=NVARCHAR},
+      </if>
+      <if test="keywords != null" >
+        Keywords = #{keywords,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.SysNews" >
+    update dbo.Sys_News
+    set Title = #{title,jdbcType=NVARCHAR},
+      TitleType = #{titletype,jdbcType=NVARCHAR},
+      PicPath = #{picpath,jdbcType=NVARCHAR},
+      Descrip = #{descrip,jdbcType=NVARCHAR},
+      NewsContent = #{newscontent,jdbcType=NVARCHAR},
+      IsTop = #{istop,jdbcType=INTEGER},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      ShowTimes = #{showtimes,jdbcType=INTEGER},
+      NewsType = #{newstype,jdbcType=NVARCHAR},
+      TheAuthor = #{theauthor,jdbcType=NVARCHAR},
+      Keywords = #{keywords,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

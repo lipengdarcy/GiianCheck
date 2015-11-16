@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.WReplykeywordMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.WReplykeyword" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SiteID" property="siteid" jdbcType="INTEGER" />
+    <result column="Type" property="type" jdbcType="SMALLINT" />
+    <result column="IsFirst" property="isfirst" jdbcType="SMALLINT" />
+    <result column="MatchType" property="matchtype" jdbcType="SMALLINT" />
+    <result column="Keywords" property="keywords" jdbcType="NVARCHAR" />
+    <result column="AppType" property="apptype" jdbcType="INTEGER" />
+    <result column="AppID" property="appid" jdbcType="INTEGER" />
+    <result column="IsMass" property="ismass" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SiteID, Type, IsFirst, MatchType, Keywords, AppType, AppID, IsMass
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.WReplykeywordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.W_ReplyKeyword
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.W_ReplyKeyword
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.W_ReplyKeyword
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.WReplykeywordExample" >
+    delete from dbo.W_ReplyKeyword
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.WReplykeyword" >
+    insert into dbo.W_ReplyKeyword (ID, SiteID, Type, 
+      IsFirst, MatchType, Keywords, 
+      AppType, AppID, IsMass
+      )
+    values (#{id,jdbcType=INTEGER}, #{siteid,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, 
+      #{isfirst,jdbcType=SMALLINT}, #{matchtype,jdbcType=SMALLINT}, #{keywords,jdbcType=NVARCHAR}, 
+      #{apptype,jdbcType=INTEGER}, #{appid,jdbcType=INTEGER}, #{ismass,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.WReplykeyword" >
+    insert into dbo.W_ReplyKeyword
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="siteid != null" >
+        SiteID,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="isfirst != null" >
+        IsFirst,
+      </if>
+      <if test="matchtype != null" >
+        MatchType,
+      </if>
+      <if test="keywords != null" >
+        Keywords,
+      </if>
+      <if test="apptype != null" >
+        AppType,
+      </if>
+      <if test="appid != null" >
+        AppID,
+      </if>
+      <if test="ismass != null" >
+        IsMass,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="siteid != null" >
+        #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="isfirst != null" >
+        #{isfirst,jdbcType=SMALLINT},
+      </if>
+      <if test="matchtype != null" >
+        #{matchtype,jdbcType=SMALLINT},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="apptype != null" >
+        #{apptype,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="ismass != null" >
+        #{ismass,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.WReplykeywordExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.W_ReplyKeyword
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.W_ReplyKeyword
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteid != null" >
+        SiteID = #{record.siteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        Type = #{record.type,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isfirst != null" >
+        IsFirst = #{record.isfirst,jdbcType=SMALLINT},
+      </if>
+      <if test="record.matchtype != null" >
+        MatchType = #{record.matchtype,jdbcType=SMALLINT},
+      </if>
+      <if test="record.keywords != null" >
+        Keywords = #{record.keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.apptype != null" >
+        AppType = #{record.apptype,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null" >
+        AppID = #{record.appid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ismass != null" >
+        IsMass = #{record.ismass,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.W_ReplyKeyword
+    set ID = #{record.id,jdbcType=INTEGER},
+      SiteID = #{record.siteid,jdbcType=INTEGER},
+      Type = #{record.type,jdbcType=SMALLINT},
+      IsFirst = #{record.isfirst,jdbcType=SMALLINT},
+      MatchType = #{record.matchtype,jdbcType=SMALLINT},
+      Keywords = #{record.keywords,jdbcType=NVARCHAR},
+      AppType = #{record.apptype,jdbcType=INTEGER},
+      AppID = #{record.appid,jdbcType=INTEGER},
+      IsMass = #{record.ismass,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.WReplykeyword" >
+    update dbo.W_ReplyKeyword
+    <set >
+      <if test="siteid != null" >
+        SiteID = #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        Type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="isfirst != null" >
+        IsFirst = #{isfirst,jdbcType=SMALLINT},
+      </if>
+      <if test="matchtype != null" >
+        MatchType = #{matchtype,jdbcType=SMALLINT},
+      </if>
+      <if test="keywords != null" >
+        Keywords = #{keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="apptype != null" >
+        AppType = #{apptype,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        AppID = #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="ismass != null" >
+        IsMass = #{ismass,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.WReplykeyword" >
+    update dbo.W_ReplyKeyword
+    set SiteID = #{siteid,jdbcType=INTEGER},
+      Type = #{type,jdbcType=SMALLINT},
+      IsFirst = #{isfirst,jdbcType=SMALLINT},
+      MatchType = #{matchtype,jdbcType=SMALLINT},
+      Keywords = #{keywords,jdbcType=NVARCHAR},
+      AppType = #{apptype,jdbcType=INTEGER},
+      AppID = #{appid,jdbcType=INTEGER},
+      IsMass = #{ismass,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

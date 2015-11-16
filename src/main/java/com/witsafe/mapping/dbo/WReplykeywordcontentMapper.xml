@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.WReplykeywordcontentMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.WReplykeywordcontent" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SiteID" property="siteid" jdbcType="INTEGER" />
+    <result column="KeywordID" property="keywordid" jdbcType="INTEGER" />
+    <result column="Title" property="title" jdbcType="NVARCHAR" />
+    <result column="Img" property="img" jdbcType="NVARCHAR" />
+    <result column="Links" property="links" jdbcType="NVARCHAR" />
+    <result column="Links2" property="links2" jdbcType="NVARCHAR" />
+    <result column="Description" property="description" jdbcType="NVARCHAR" />
+    <result column="Sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="AddTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="KeyContent" property="keycontent" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SiteID, KeywordID, Title, Img, Links, Links2, Description, Sequence, AddTime, 
+    KeyContent
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.WReplykeywordcontentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.W_ReplyKeywordContent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.W_ReplyKeywordContent
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.W_ReplyKeywordContent
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.WReplykeywordcontentExample" >
+    delete from dbo.W_ReplyKeywordContent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.WReplykeywordcontent" >
+    insert into dbo.W_ReplyKeywordContent (ID, SiteID, KeywordID, 
+      Title, Img, Links, 
+      Links2, Description, Sequence, 
+      AddTime, KeyContent)
+    values (#{id,jdbcType=INTEGER}, #{siteid,jdbcType=INTEGER}, #{keywordid,jdbcType=INTEGER}, 
+      #{title,jdbcType=NVARCHAR}, #{img,jdbcType=NVARCHAR}, #{links,jdbcType=NVARCHAR}, 
+      #{links2,jdbcType=NVARCHAR}, #{description,jdbcType=NVARCHAR}, #{sequence,jdbcType=INTEGER}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{keycontent,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.WReplykeywordcontent" >
+    insert into dbo.W_ReplyKeywordContent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="siteid != null" >
+        SiteID,
+      </if>
+      <if test="keywordid != null" >
+        KeywordID,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="img != null" >
+        Img,
+      </if>
+      <if test="links != null" >
+        Links,
+      </if>
+      <if test="links2 != null" >
+        Links2,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="sequence != null" >
+        Sequence,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="keycontent != null" >
+        KeyContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="siteid != null" >
+        #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="keywordid != null" >
+        #{keywordid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=NVARCHAR},
+      </if>
+      <if test="links != null" >
+        #{links,jdbcType=NVARCHAR},
+      </if>
+      <if test="links2 != null" >
+        #{links2,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keycontent != null" >
+        #{keycontent,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.WReplykeywordcontentExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.W_ReplyKeywordContent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.W_ReplyKeywordContent
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteid != null" >
+        SiteID = #{record.siteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.keywordid != null" >
+        KeywordID = #{record.keywordid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.img != null" >
+        Img = #{record.img,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.links != null" >
+        Links = #{record.links,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.links2 != null" >
+        Links2 = #{record.links2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        Sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.keycontent != null" >
+        KeyContent = #{record.keycontent,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.W_ReplyKeywordContent
+    set ID = #{record.id,jdbcType=INTEGER},
+      SiteID = #{record.siteid,jdbcType=INTEGER},
+      KeywordID = #{record.keywordid,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=NVARCHAR},
+      Img = #{record.img,jdbcType=NVARCHAR},
+      Links = #{record.links,jdbcType=NVARCHAR},
+      Links2 = #{record.links2,jdbcType=NVARCHAR},
+      Description = #{record.description,jdbcType=NVARCHAR},
+      Sequence = #{record.sequence,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      KeyContent = #{record.keycontent,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.WReplykeywordcontent" >
+    update dbo.W_ReplyKeywordContent
+    <set >
+      <if test="siteid != null" >
+        SiteID = #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="keywordid != null" >
+        KeywordID = #{keywordid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        Title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="img != null" >
+        Img = #{img,jdbcType=NVARCHAR},
+      </if>
+      <if test="links != null" >
+        Links = #{links,jdbcType=NVARCHAR},
+      </if>
+      <if test="links2 != null" >
+        Links2 = #{links2,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="sequence != null" >
+        Sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keycontent != null" >
+        KeyContent = #{keycontent,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.WReplykeywordcontent" >
+    update dbo.W_ReplyKeywordContent
+    set SiteID = #{siteid,jdbcType=INTEGER},
+      KeywordID = #{keywordid,jdbcType=INTEGER},
+      Title = #{title,jdbcType=NVARCHAR},
+      Img = #{img,jdbcType=NVARCHAR},
+      Links = #{links,jdbcType=NVARCHAR},
+      Links2 = #{links2,jdbcType=NVARCHAR},
+      Description = #{description,jdbcType=NVARCHAR},
+      Sequence = #{sequence,jdbcType=INTEGER},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      KeyContent = #{keycontent,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

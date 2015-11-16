@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.WRequestlogMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.WRequestlog" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MsgType" property="msgtype" jdbcType="NVARCHAR" />
+    <result column="FromUserName" property="fromusername" jdbcType="NVARCHAR" />
+    <result column="ToUserName" property="tousername" jdbcType="NVARCHAR" />
+    <result column="SiteID" property="siteid" jdbcType="INTEGER" />
+    <result column="RequestTime" property="requesttime" jdbcType="TIMESTAMP" />
+    <result column="PostString" property="poststring" jdbcType="NVARCHAR" />
+    <result column="MsgEvent" property="msgevent" jdbcType="NVARCHAR" />
+    <result column="Argument" property="argument" jdbcType="NVARCHAR" />
+    <result column="ReType" property="retype" jdbcType="NVARCHAR" />
+    <result column="ReKeywords" property="rekeywords" jdbcType="NVARCHAR" />
+    <result column="ReID" property="reid" jdbcType="INTEGER" />
+    <result column="ReToPlace" property="retoplace" jdbcType="NVARCHAR" />
+    <result column="ReImg" property="reimg" jdbcType="NVARCHAR" />
+    <result column="TheDate" property="thedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MsgType, FromUserName, ToUserName, SiteID, RequestTime, PostString, MsgEvent, 
+    Argument, ReType, ReKeywords, ReID, ReToPlace, ReImg, TheDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.WRequestlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.W_RequestLog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.W_RequestLog
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.W_RequestLog
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.WRequestlogExample" >
+    delete from dbo.W_RequestLog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.WRequestlog" >
+    insert into dbo.W_RequestLog (ID, MsgType, FromUserName, 
+      ToUserName, SiteID, RequestTime, 
+      PostString, MsgEvent, Argument, 
+      ReType, ReKeywords, ReID, 
+      ReToPlace, ReImg, TheDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{msgtype,jdbcType=NVARCHAR}, #{fromusername,jdbcType=NVARCHAR}, 
+      #{tousername,jdbcType=NVARCHAR}, #{siteid,jdbcType=INTEGER}, #{requesttime,jdbcType=TIMESTAMP}, 
+      #{poststring,jdbcType=NVARCHAR}, #{msgevent,jdbcType=NVARCHAR}, #{argument,jdbcType=NVARCHAR}, 
+      #{retype,jdbcType=NVARCHAR}, #{rekeywords,jdbcType=NVARCHAR}, #{reid,jdbcType=INTEGER}, 
+      #{retoplace,jdbcType=NVARCHAR}, #{reimg,jdbcType=NVARCHAR}, #{thedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.WRequestlog" >
+    insert into dbo.W_RequestLog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="msgtype != null" >
+        MsgType,
+      </if>
+      <if test="fromusername != null" >
+        FromUserName,
+      </if>
+      <if test="tousername != null" >
+        ToUserName,
+      </if>
+      <if test="siteid != null" >
+        SiteID,
+      </if>
+      <if test="requesttime != null" >
+        RequestTime,
+      </if>
+      <if test="poststring != null" >
+        PostString,
+      </if>
+      <if test="msgevent != null" >
+        MsgEvent,
+      </if>
+      <if test="argument != null" >
+        Argument,
+      </if>
+      <if test="retype != null" >
+        ReType,
+      </if>
+      <if test="rekeywords != null" >
+        ReKeywords,
+      </if>
+      <if test="reid != null" >
+        ReID,
+      </if>
+      <if test="retoplace != null" >
+        ReToPlace,
+      </if>
+      <if test="reimg != null" >
+        ReImg,
+      </if>
+      <if test="thedate != null" >
+        TheDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="msgtype != null" >
+        #{msgtype,jdbcType=NVARCHAR},
+      </if>
+      <if test="fromusername != null" >
+        #{fromusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="tousername != null" >
+        #{tousername,jdbcType=NVARCHAR},
+      </if>
+      <if test="siteid != null" >
+        #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="requesttime != null" >
+        #{requesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poststring != null" >
+        #{poststring,jdbcType=NVARCHAR},
+      </if>
+      <if test="msgevent != null" >
+        #{msgevent,jdbcType=NVARCHAR},
+      </if>
+      <if test="argument != null" >
+        #{argument,jdbcType=NVARCHAR},
+      </if>
+      <if test="retype != null" >
+        #{retype,jdbcType=NVARCHAR},
+      </if>
+      <if test="rekeywords != null" >
+        #{rekeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="reid != null" >
+        #{reid,jdbcType=INTEGER},
+      </if>
+      <if test="retoplace != null" >
+        #{retoplace,jdbcType=NVARCHAR},
+      </if>
+      <if test="reimg != null" >
+        #{reimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="thedate != null" >
+        #{thedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.WRequestlogExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.W_RequestLog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.W_RequestLog
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgtype != null" >
+        MsgType = #{record.msgtype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fromusername != null" >
+        FromUserName = #{record.fromusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tousername != null" >
+        ToUserName = #{record.tousername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.siteid != null" >
+        SiteID = #{record.siteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.requesttime != null" >
+        RequestTime = #{record.requesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.poststring != null" >
+        PostString = #{record.poststring,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.msgevent != null" >
+        MsgEvent = #{record.msgevent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.argument != null" >
+        Argument = #{record.argument,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.retype != null" >
+        ReType = #{record.retype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.rekeywords != null" >
+        ReKeywords = #{record.rekeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.reid != null" >
+        ReID = #{record.reid,jdbcType=INTEGER},
+      </if>
+      <if test="record.retoplace != null" >
+        ReToPlace = #{record.retoplace,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.reimg != null" >
+        ReImg = #{record.reimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.thedate != null" >
+        TheDate = #{record.thedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.W_RequestLog
+    set ID = #{record.id,jdbcType=INTEGER},
+      MsgType = #{record.msgtype,jdbcType=NVARCHAR},
+      FromUserName = #{record.fromusername,jdbcType=NVARCHAR},
+      ToUserName = #{record.tousername,jdbcType=NVARCHAR},
+      SiteID = #{record.siteid,jdbcType=INTEGER},
+      RequestTime = #{record.requesttime,jdbcType=TIMESTAMP},
+      PostString = #{record.poststring,jdbcType=NVARCHAR},
+      MsgEvent = #{record.msgevent,jdbcType=NVARCHAR},
+      Argument = #{record.argument,jdbcType=NVARCHAR},
+      ReType = #{record.retype,jdbcType=NVARCHAR},
+      ReKeywords = #{record.rekeywords,jdbcType=NVARCHAR},
+      ReID = #{record.reid,jdbcType=INTEGER},
+      ReToPlace = #{record.retoplace,jdbcType=NVARCHAR},
+      ReImg = #{record.reimg,jdbcType=NVARCHAR},
+      TheDate = #{record.thedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.WRequestlog" >
+    update dbo.W_RequestLog
+    <set >
+      <if test="msgtype != null" >
+        MsgType = #{msgtype,jdbcType=NVARCHAR},
+      </if>
+      <if test="fromusername != null" >
+        FromUserName = #{fromusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="tousername != null" >
+        ToUserName = #{tousername,jdbcType=NVARCHAR},
+      </if>
+      <if test="siteid != null" >
+        SiteID = #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="requesttime != null" >
+        RequestTime = #{requesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poststring != null" >
+        PostString = #{poststring,jdbcType=NVARCHAR},
+      </if>
+      <if test="msgevent != null" >
+        MsgEvent = #{msgevent,jdbcType=NVARCHAR},
+      </if>
+      <if test="argument != null" >
+        Argument = #{argument,jdbcType=NVARCHAR},
+      </if>
+      <if test="retype != null" >
+        ReType = #{retype,jdbcType=NVARCHAR},
+      </if>
+      <if test="rekeywords != null" >
+        ReKeywords = #{rekeywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="reid != null" >
+        ReID = #{reid,jdbcType=INTEGER},
+      </if>
+      <if test="retoplace != null" >
+        ReToPlace = #{retoplace,jdbcType=NVARCHAR},
+      </if>
+      <if test="reimg != null" >
+        ReImg = #{reimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="thedate != null" >
+        TheDate = #{thedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.WRequestlog" >
+    update dbo.W_RequestLog
+    set MsgType = #{msgtype,jdbcType=NVARCHAR},
+      FromUserName = #{fromusername,jdbcType=NVARCHAR},
+      ToUserName = #{tousername,jdbcType=NVARCHAR},
+      SiteID = #{siteid,jdbcType=INTEGER},
+      RequestTime = #{requesttime,jdbcType=TIMESTAMP},
+      PostString = #{poststring,jdbcType=NVARCHAR},
+      MsgEvent = #{msgevent,jdbcType=NVARCHAR},
+      Argument = #{argument,jdbcType=NVARCHAR},
+      ReType = #{retype,jdbcType=NVARCHAR},
+      ReKeywords = #{rekeywords,jdbcType=NVARCHAR},
+      ReID = #{reid,jdbcType=INTEGER},
+      ReToPlace = #{retoplace,jdbcType=NVARCHAR},
+      ReImg = #{reimg,jdbcType=NVARCHAR},
+      TheDate = #{thedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

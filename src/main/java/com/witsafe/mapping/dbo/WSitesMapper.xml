@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.WSitesMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.WSites" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="UserID" property="userid" jdbcType="INTEGER" />
+    <result column="AgentsID" property="agentsid" jdbcType="INTEGER" />
+    <result column="SiteName" property="sitename" jdbcType="NVARCHAR" />
+    <result column="Cost" property="cost" jdbcType="DECIMAL" />
+    <result column="State" property="state" jdbcType="SMALLINT" />
+    <result column="AuditReason" property="auditreason" jdbcType="NVARCHAR" />
+    <result column="Company" property="company" jdbcType="NVARCHAR" />
+    <result column="Introduc" property="introduc" jdbcType="NVARCHAR" />
+    <result column="Password" property="password" jdbcType="NVARCHAR" />
+    <result column="Public_Accounts" property="publicAccounts" jdbcType="NVARCHAR" />
+    <result column="Token" property="token" jdbcType="NVARCHAR" />
+    <result column="ToUserName" property="tousername" jdbcType="NVARCHAR" />
+    <result column="AppId" property="appid" jdbcType="NVARCHAR" />
+    <result column="AppSecret" property="appsecret" jdbcType="NVARCHAR" />
+    <result column="Access_token" property="accessToken" jdbcType="NVARCHAR" />
+    <result column="Access_tokenTime" property="accessTokentime" jdbcType="TIMESTAMP" />
+    <result column="DefaultPic" property="defaultpic" jdbcType="NVARCHAR" />
+    <result column="Longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="Latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="Tel" property="tel" jdbcType="NVARCHAR" />
+    <result column="IsShowTel" property="isshowtel" jdbcType="BIT" />
+    <result column="IsShortcutMenu" property="isshortcutmenu" jdbcType="BIT" />
+    <result column="IsButtonMenu" property="isbuttonmenu" jdbcType="BIT" />
+    <result column="Address" property="address" jdbcType="NVARCHAR" />
+    <result column="MemberInfo" property="memberinfo" jdbcType="NVARCHAR" />
+    <result column="TemplateIndex" property="templateindex" jdbcType="SMALLINT" />
+    <result column="ListIndex" property="listindex" jdbcType="SMALLINT" />
+    <result column="DetailIndex" property="detailindex" jdbcType="SMALLINT" />
+    <result column="ProductIndex" property="productindex" jdbcType="SMALLINT" />
+    <result column="Title" property="title" jdbcType="NVARCHAR" />
+    <result column="Keywords" property="keywords" jdbcType="NVARCHAR" />
+    <result column="Description" property="description" jdbcType="NVARCHAR" />
+    <result column="BakImgIndex" property="bakimgindex" jdbcType="NVARCHAR" />
+    <result column="BakImg" property="bakimg" jdbcType="NVARCHAR" />
+    <result column="BakMusic" property="bakmusic" jdbcType="NVARCHAR" />
+    <result column="IsBakImg" property="isbakimg" jdbcType="BIT" />
+    <result column="IsBakMusic" property="isbakmusic" jdbcType="BIT" />
+    <result column="Copyright" property="copyright" jdbcType="NVARCHAR" />
+    <result column="CopyrightUrl" property="copyrighturl" jdbcType="NVARCHAR" />
+    <result column="TechSupport" property="techsupport" jdbcType="NVARCHAR" />
+    <result column="TechSupportUrl" property="techsupporturl" jdbcType="NVARCHAR" />
+    <result column="StatCode" property="statcode" jdbcType="NVARCHAR" />
+    <result column="Sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="AddTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="next_openid" property="nextOpenid" jdbcType="NVARCHAR" />
+    <result column="weitype" property="weitype" jdbcType="INTEGER" />
+    <result column="Logo" property="logo" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, UserID, AgentsID, SiteName, Cost, State, AuditReason, Company, Introduc, Password, 
+    Public_Accounts, Token, ToUserName, AppId, AppSecret, Access_token, Access_tokenTime, 
+    DefaultPic, Longitude, Latitude, Tel, IsShowTel, IsShortcutMenu, IsButtonMenu, Address, 
+    MemberInfo, TemplateIndex, ListIndex, DetailIndex, ProductIndex, Title, Keywords, 
+    Description, BakImgIndex, BakImg, BakMusic, IsBakImg, IsBakMusic, Copyright, CopyrightUrl, 
+    TechSupport, TechSupportUrl, StatCode, Sequence, AddTime, next_openid, weitype, Logo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.WSitesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.W_Sites
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.W_Sites
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.W_Sites
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.WSitesExample" >
+    delete from dbo.W_Sites
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.WSites" >
+    insert into dbo.W_Sites (ID, UserID, AgentsID, 
+      SiteName, Cost, State, 
+      AuditReason, Company, Introduc, 
+      Password, Public_Accounts, Token, 
+      ToUserName, AppId, AppSecret, 
+      Access_token, Access_tokenTime, DefaultPic, 
+      Longitude, Latitude, Tel, 
+      IsShowTel, IsShortcutMenu, IsButtonMenu, 
+      Address, MemberInfo, TemplateIndex, 
+      ListIndex, DetailIndex, ProductIndex, 
+      Title, Keywords, Description, 
+      BakImgIndex, BakImg, BakMusic, 
+      IsBakImg, IsBakMusic, Copyright, 
+      CopyrightUrl, TechSupport, TechSupportUrl, 
+      StatCode, Sequence, AddTime, 
+      next_openid, weitype, Logo
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{agentsid,jdbcType=INTEGER}, 
+      #{sitename,jdbcType=NVARCHAR}, #{cost,jdbcType=DECIMAL}, #{state,jdbcType=SMALLINT}, 
+      #{auditreason,jdbcType=NVARCHAR}, #{company,jdbcType=NVARCHAR}, #{introduc,jdbcType=NVARCHAR}, 
+      #{password,jdbcType=NVARCHAR}, #{publicAccounts,jdbcType=NVARCHAR}, #{token,jdbcType=NVARCHAR}, 
+      #{tousername,jdbcType=NVARCHAR}, #{appid,jdbcType=NVARCHAR}, #{appsecret,jdbcType=NVARCHAR}, 
+      #{accessToken,jdbcType=NVARCHAR}, #{accessTokentime,jdbcType=TIMESTAMP}, #{defaultpic,jdbcType=NVARCHAR}, 
+      #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, #{tel,jdbcType=NVARCHAR}, 
+      #{isshowtel,jdbcType=BIT}, #{isshortcutmenu,jdbcType=BIT}, #{isbuttonmenu,jdbcType=BIT}, 
+      #{address,jdbcType=NVARCHAR}, #{memberinfo,jdbcType=NVARCHAR}, #{templateindex,jdbcType=SMALLINT}, 
+      #{listindex,jdbcType=SMALLINT}, #{detailindex,jdbcType=SMALLINT}, #{productindex,jdbcType=SMALLINT}, 
+      #{title,jdbcType=NVARCHAR}, #{keywords,jdbcType=NVARCHAR}, #{description,jdbcType=NVARCHAR}, 
+      #{bakimgindex,jdbcType=NVARCHAR}, #{bakimg,jdbcType=NVARCHAR}, #{bakmusic,jdbcType=NVARCHAR}, 
+      #{isbakimg,jdbcType=BIT}, #{isbakmusic,jdbcType=BIT}, #{copyright,jdbcType=NVARCHAR}, 
+      #{copyrighturl,jdbcType=NVARCHAR}, #{techsupport,jdbcType=NVARCHAR}, #{techsupporturl,jdbcType=NVARCHAR}, 
+      #{statcode,jdbcType=NVARCHAR}, #{sequence,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{nextOpenid,jdbcType=NVARCHAR}, #{weitype,jdbcType=INTEGER}, #{logo,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.WSites" >
+    insert into dbo.W_Sites
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="agentsid != null" >
+        AgentsID,
+      </if>
+      <if test="sitename != null" >
+        SiteName,
+      </if>
+      <if test="cost != null" >
+        Cost,
+      </if>
+      <if test="state != null" >
+        State,
+      </if>
+      <if test="auditreason != null" >
+        AuditReason,
+      </if>
+      <if test="company != null" >
+        Company,
+      </if>
+      <if test="introduc != null" >
+        Introduc,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="publicAccounts != null" >
+        Public_Accounts,
+      </if>
+      <if test="token != null" >
+        Token,
+      </if>
+      <if test="tousername != null" >
+        ToUserName,
+      </if>
+      <if test="appid != null" >
+        AppId,
+      </if>
+      <if test="appsecret != null" >
+        AppSecret,
+      </if>
+      <if test="accessToken != null" >
+        Access_token,
+      </if>
+      <if test="accessTokentime != null" >
+        Access_tokenTime,
+      </if>
+      <if test="defaultpic != null" >
+        DefaultPic,
+      </if>
+      <if test="longitude != null" >
+        Longitude,
+      </if>
+      <if test="latitude != null" >
+        Latitude,
+      </if>
+      <if test="tel != null" >
+        Tel,
+      </if>
+      <if test="isshowtel != null" >
+        IsShowTel,
+      </if>
+      <if test="isshortcutmenu != null" >
+        IsShortcutMenu,
+      </if>
+      <if test="isbuttonmenu != null" >
+        IsButtonMenu,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="memberinfo != null" >
+        MemberInfo,
+      </if>
+      <if test="templateindex != null" >
+        TemplateIndex,
+      </if>
+      <if test="listindex != null" >
+        ListIndex,
+      </if>
+      <if test="detailindex != null" >
+        DetailIndex,
+      </if>
+      <if test="productindex != null" >
+        ProductIndex,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="keywords != null" >
+        Keywords,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="bakimgindex != null" >
+        BakImgIndex,
+      </if>
+      <if test="bakimg != null" >
+        BakImg,
+      </if>
+      <if test="bakmusic != null" >
+        BakMusic,
+      </if>
+      <if test="isbakimg != null" >
+        IsBakImg,
+      </if>
+      <if test="isbakmusic != null" >
+        IsBakMusic,
+      </if>
+      <if test="copyright != null" >
+        Copyright,
+      </if>
+      <if test="copyrighturl != null" >
+        CopyrightUrl,
+      </if>
+      <if test="techsupport != null" >
+        TechSupport,
+      </if>
+      <if test="techsupporturl != null" >
+        TechSupportUrl,
+      </if>
+      <if test="statcode != null" >
+        StatCode,
+      </if>
+      <if test="sequence != null" >
+        Sequence,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="nextOpenid != null" >
+        next_openid,
+      </if>
+      <if test="weitype != null" >
+        weitype,
+      </if>
+      <if test="logo != null" >
+        Logo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="agentsid != null" >
+        #{agentsid,jdbcType=INTEGER},
+      </if>
+      <if test="sitename != null" >
+        #{sitename,jdbcType=NVARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="auditreason != null" >
+        #{auditreason,jdbcType=NVARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduc != null" >
+        #{introduc,jdbcType=NVARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=NVARCHAR},
+      </if>
+      <if test="publicAccounts != null" >
+        #{publicAccounts,jdbcType=NVARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=NVARCHAR},
+      </if>
+      <if test="tousername != null" >
+        #{tousername,jdbcType=NVARCHAR},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=NVARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        #{appsecret,jdbcType=NVARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        #{accessToken,jdbcType=NVARCHAR},
+      </if>
+      <if test="accessTokentime != null" >
+        #{accessTokentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="defaultpic != null" >
+        #{defaultpic,jdbcType=NVARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshowtel != null" >
+        #{isshowtel,jdbcType=BIT},
+      </if>
+      <if test="isshortcutmenu != null" >
+        #{isshortcutmenu,jdbcType=BIT},
+      </if>
+      <if test="isbuttonmenu != null" >
+        #{isbuttonmenu,jdbcType=BIT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=NVARCHAR},
+      </if>
+      <if test="memberinfo != null" >
+        #{memberinfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateindex != null" >
+        #{templateindex,jdbcType=SMALLINT},
+      </if>
+      <if test="listindex != null" >
+        #{listindex,jdbcType=SMALLINT},
+      </if>
+      <if test="detailindex != null" >
+        #{detailindex,jdbcType=SMALLINT},
+      </if>
+      <if test="productindex != null" >
+        #{productindex,jdbcType=SMALLINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="bakimgindex != null" >
+        #{bakimgindex,jdbcType=NVARCHAR},
+      </if>
+      <if test="bakimg != null" >
+        #{bakimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="bakmusic != null" >
+        #{bakmusic,jdbcType=NVARCHAR},
+      </if>
+      <if test="isbakimg != null" >
+        #{isbakimg,jdbcType=BIT},
+      </if>
+      <if test="isbakmusic != null" >
+        #{isbakmusic,jdbcType=BIT},
+      </if>
+      <if test="copyright != null" >
+        #{copyright,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyrighturl != null" >
+        #{copyrighturl,jdbcType=NVARCHAR},
+      </if>
+      <if test="techsupport != null" >
+        #{techsupport,jdbcType=NVARCHAR},
+      </if>
+      <if test="techsupporturl != null" >
+        #{techsupporturl,jdbcType=NVARCHAR},
+      </if>
+      <if test="statcode != null" >
+        #{statcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextOpenid != null" >
+        #{nextOpenid,jdbcType=NVARCHAR},
+      </if>
+      <if test="weitype != null" >
+        #{weitype,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.WSitesExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.W_Sites
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.W_Sites
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentsid != null" >
+        AgentsID = #{record.agentsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sitename != null" >
+        SiteName = #{record.sitename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cost != null" >
+        Cost = #{record.cost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        State = #{record.state,jdbcType=SMALLINT},
+      </if>
+      <if test="record.auditreason != null" >
+        AuditReason = #{record.auditreason,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.company != null" >
+        Company = #{record.company,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduc != null" >
+        Introduc = #{record.introduc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.password != null" >
+        Password = #{record.password,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.publicAccounts != null" >
+        Public_Accounts = #{record.publicAccounts,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.token != null" >
+        Token = #{record.token,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tousername != null" >
+        ToUserName = #{record.tousername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.appid != null" >
+        AppId = #{record.appid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.appsecret != null" >
+        AppSecret = #{record.appsecret,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.accessToken != null" >
+        Access_token = #{record.accessToken,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.accessTokentime != null" >
+        Access_tokenTime = #{record.accessTokentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.defaultpic != null" >
+        DefaultPic = #{record.defaultpic,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        Longitude = #{record.longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude != null" >
+        Latitude = #{record.latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tel != null" >
+        Tel = #{record.tel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isshowtel != null" >
+        IsShowTel = #{record.isshowtel,jdbcType=BIT},
+      </if>
+      <if test="record.isshortcutmenu != null" >
+        IsShortcutMenu = #{record.isshortcutmenu,jdbcType=BIT},
+      </if>
+      <if test="record.isbuttonmenu != null" >
+        IsButtonMenu = #{record.isbuttonmenu,jdbcType=BIT},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.memberinfo != null" >
+        MemberInfo = #{record.memberinfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateindex != null" >
+        TemplateIndex = #{record.templateindex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.listindex != null" >
+        ListIndex = #{record.listindex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.detailindex != null" >
+        DetailIndex = #{record.detailindex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.productindex != null" >
+        ProductIndex = #{record.productindex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        Keywords = #{record.keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bakimgindex != null" >
+        BakImgIndex = #{record.bakimgindex,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bakimg != null" >
+        BakImg = #{record.bakimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bakmusic != null" >
+        BakMusic = #{record.bakmusic,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isbakimg != null" >
+        IsBakImg = #{record.isbakimg,jdbcType=BIT},
+      </if>
+      <if test="record.isbakmusic != null" >
+        IsBakMusic = #{record.isbakmusic,jdbcType=BIT},
+      </if>
+      <if test="record.copyright != null" >
+        Copyright = #{record.copyright,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.copyrighturl != null" >
+        CopyrightUrl = #{record.copyrighturl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.techsupport != null" >
+        TechSupport = #{record.techsupport,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.techsupporturl != null" >
+        TechSupportUrl = #{record.techsupporturl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.statcode != null" >
+        StatCode = #{record.statcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        Sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nextOpenid != null" >
+        next_openid = #{record.nextOpenid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.weitype != null" >
+        weitype = #{record.weitype,jdbcType=INTEGER},
+      </if>
+      <if test="record.logo != null" >
+        Logo = #{record.logo,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.W_Sites
+    set ID = #{record.id,jdbcType=INTEGER},
+      UserID = #{record.userid,jdbcType=INTEGER},
+      AgentsID = #{record.agentsid,jdbcType=INTEGER},
+      SiteName = #{record.sitename,jdbcType=NVARCHAR},
+      Cost = #{record.cost,jdbcType=DECIMAL},
+      State = #{record.state,jdbcType=SMALLINT},
+      AuditReason = #{record.auditreason,jdbcType=NVARCHAR},
+      Company = #{record.company,jdbcType=NVARCHAR},
+      Introduc = #{record.introduc,jdbcType=NVARCHAR},
+      Password = #{record.password,jdbcType=NVARCHAR},
+      Public_Accounts = #{record.publicAccounts,jdbcType=NVARCHAR},
+      Token = #{record.token,jdbcType=NVARCHAR},
+      ToUserName = #{record.tousername,jdbcType=NVARCHAR},
+      AppId = #{record.appid,jdbcType=NVARCHAR},
+      AppSecret = #{record.appsecret,jdbcType=NVARCHAR},
+      Access_token = #{record.accessToken,jdbcType=NVARCHAR},
+      Access_tokenTime = #{record.accessTokentime,jdbcType=TIMESTAMP},
+      DefaultPic = #{record.defaultpic,jdbcType=NVARCHAR},
+      Longitude = #{record.longitude,jdbcType=DOUBLE},
+      Latitude = #{record.latitude,jdbcType=DOUBLE},
+      Tel = #{record.tel,jdbcType=NVARCHAR},
+      IsShowTel = #{record.isshowtel,jdbcType=BIT},
+      IsShortcutMenu = #{record.isshortcutmenu,jdbcType=BIT},
+      IsButtonMenu = #{record.isbuttonmenu,jdbcType=BIT},
+      Address = #{record.address,jdbcType=NVARCHAR},
+      MemberInfo = #{record.memberinfo,jdbcType=NVARCHAR},
+      TemplateIndex = #{record.templateindex,jdbcType=SMALLINT},
+      ListIndex = #{record.listindex,jdbcType=SMALLINT},
+      DetailIndex = #{record.detailindex,jdbcType=SMALLINT},
+      ProductIndex = #{record.productindex,jdbcType=SMALLINT},
+      Title = #{record.title,jdbcType=NVARCHAR},
+      Keywords = #{record.keywords,jdbcType=NVARCHAR},
+      Description = #{record.description,jdbcType=NVARCHAR},
+      BakImgIndex = #{record.bakimgindex,jdbcType=NVARCHAR},
+      BakImg = #{record.bakimg,jdbcType=NVARCHAR},
+      BakMusic = #{record.bakmusic,jdbcType=NVARCHAR},
+      IsBakImg = #{record.isbakimg,jdbcType=BIT},
+      IsBakMusic = #{record.isbakmusic,jdbcType=BIT},
+      Copyright = #{record.copyright,jdbcType=NVARCHAR},
+      CopyrightUrl = #{record.copyrighturl,jdbcType=NVARCHAR},
+      TechSupport = #{record.techsupport,jdbcType=NVARCHAR},
+      TechSupportUrl = #{record.techsupporturl,jdbcType=NVARCHAR},
+      StatCode = #{record.statcode,jdbcType=NVARCHAR},
+      Sequence = #{record.sequence,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      next_openid = #{record.nextOpenid,jdbcType=NVARCHAR},
+      weitype = #{record.weitype,jdbcType=INTEGER},
+      Logo = #{record.logo,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.WSites" >
+    update dbo.W_Sites
+    <set >
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="agentsid != null" >
+        AgentsID = #{agentsid,jdbcType=INTEGER},
+      </if>
+      <if test="sitename != null" >
+        SiteName = #{sitename,jdbcType=NVARCHAR},
+      </if>
+      <if test="cost != null" >
+        Cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        State = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="auditreason != null" >
+        AuditReason = #{auditreason,jdbcType=NVARCHAR},
+      </if>
+      <if test="company != null" >
+        Company = #{company,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduc != null" >
+        Introduc = #{introduc,jdbcType=NVARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=NVARCHAR},
+      </if>
+      <if test="publicAccounts != null" >
+        Public_Accounts = #{publicAccounts,jdbcType=NVARCHAR},
+      </if>
+      <if test="token != null" >
+        Token = #{token,jdbcType=NVARCHAR},
+      </if>
+      <if test="tousername != null" >
+        ToUserName = #{tousername,jdbcType=NVARCHAR},
+      </if>
+      <if test="appid != null" >
+        AppId = #{appid,jdbcType=NVARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        AppSecret = #{appsecret,jdbcType=NVARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        Access_token = #{accessToken,jdbcType=NVARCHAR},
+      </if>
+      <if test="accessTokentime != null" >
+        Access_tokenTime = #{accessTokentime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="defaultpic != null" >
+        DefaultPic = #{defaultpic,jdbcType=NVARCHAR},
+      </if>
+      <if test="longitude != null" >
+        Longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        Latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="tel != null" >
+        Tel = #{tel,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshowtel != null" >
+        IsShowTel = #{isshowtel,jdbcType=BIT},
+      </if>
+      <if test="isshortcutmenu != null" >
+        IsShortcutMenu = #{isshortcutmenu,jdbcType=BIT},
+      </if>
+      <if test="isbuttonmenu != null" >
+        IsButtonMenu = #{isbuttonmenu,jdbcType=BIT},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=NVARCHAR},
+      </if>
+      <if test="memberinfo != null" >
+        MemberInfo = #{memberinfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateindex != null" >
+        TemplateIndex = #{templateindex,jdbcType=SMALLINT},
+      </if>
+      <if test="listindex != null" >
+        ListIndex = #{listindex,jdbcType=SMALLINT},
+      </if>
+      <if test="detailindex != null" >
+        DetailIndex = #{detailindex,jdbcType=SMALLINT},
+      </if>
+      <if test="productindex != null" >
+        ProductIndex = #{productindex,jdbcType=SMALLINT},
+      </if>
+      <if test="title != null" >
+        Title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="keywords != null" >
+        Keywords = #{keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="bakimgindex != null" >
+        BakImgIndex = #{bakimgindex,jdbcType=NVARCHAR},
+      </if>
+      <if test="bakimg != null" >
+        BakImg = #{bakimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="bakmusic != null" >
+        BakMusic = #{bakmusic,jdbcType=NVARCHAR},
+      </if>
+      <if test="isbakimg != null" >
+        IsBakImg = #{isbakimg,jdbcType=BIT},
+      </if>
+      <if test="isbakmusic != null" >
+        IsBakMusic = #{isbakmusic,jdbcType=BIT},
+      </if>
+      <if test="copyright != null" >
+        Copyright = #{copyright,jdbcType=NVARCHAR},
+      </if>
+      <if test="copyrighturl != null" >
+        CopyrightUrl = #{copyrighturl,jdbcType=NVARCHAR},
+      </if>
+      <if test="techsupport != null" >
+        TechSupport = #{techsupport,jdbcType=NVARCHAR},
+      </if>
+      <if test="techsupporturl != null" >
+        TechSupportUrl = #{techsupporturl,jdbcType=NVARCHAR},
+      </if>
+      <if test="statcode != null" >
+        StatCode = #{statcode,jdbcType=NVARCHAR},
+      </if>
+      <if test="sequence != null" >
+        Sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextOpenid != null" >
+        next_openid = #{nextOpenid,jdbcType=NVARCHAR},
+      </if>
+      <if test="weitype != null" >
+        weitype = #{weitype,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null" >
+        Logo = #{logo,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.WSites" >
+    update dbo.W_Sites
+    set UserID = #{userid,jdbcType=INTEGER},
+      AgentsID = #{agentsid,jdbcType=INTEGER},
+      SiteName = #{sitename,jdbcType=NVARCHAR},
+      Cost = #{cost,jdbcType=DECIMAL},
+      State = #{state,jdbcType=SMALLINT},
+      AuditReason = #{auditreason,jdbcType=NVARCHAR},
+      Company = #{company,jdbcType=NVARCHAR},
+      Introduc = #{introduc,jdbcType=NVARCHAR},
+      Password = #{password,jdbcType=NVARCHAR},
+      Public_Accounts = #{publicAccounts,jdbcType=NVARCHAR},
+      Token = #{token,jdbcType=NVARCHAR},
+      ToUserName = #{tousername,jdbcType=NVARCHAR},
+      AppId = #{appid,jdbcType=NVARCHAR},
+      AppSecret = #{appsecret,jdbcType=NVARCHAR},
+      Access_token = #{accessToken,jdbcType=NVARCHAR},
+      Access_tokenTime = #{accessTokentime,jdbcType=TIMESTAMP},
+      DefaultPic = #{defaultpic,jdbcType=NVARCHAR},
+      Longitude = #{longitude,jdbcType=DOUBLE},
+      Latitude = #{latitude,jdbcType=DOUBLE},
+      Tel = #{tel,jdbcType=NVARCHAR},
+      IsShowTel = #{isshowtel,jdbcType=BIT},
+      IsShortcutMenu = #{isshortcutmenu,jdbcType=BIT},
+      IsButtonMenu = #{isbuttonmenu,jdbcType=BIT},
+      Address = #{address,jdbcType=NVARCHAR},
+      MemberInfo = #{memberinfo,jdbcType=NVARCHAR},
+      TemplateIndex = #{templateindex,jdbcType=SMALLINT},
+      ListIndex = #{listindex,jdbcType=SMALLINT},
+      DetailIndex = #{detailindex,jdbcType=SMALLINT},
+      ProductIndex = #{productindex,jdbcType=SMALLINT},
+      Title = #{title,jdbcType=NVARCHAR},
+      Keywords = #{keywords,jdbcType=NVARCHAR},
+      Description = #{description,jdbcType=NVARCHAR},
+      BakImgIndex = #{bakimgindex,jdbcType=NVARCHAR},
+      BakImg = #{bakimg,jdbcType=NVARCHAR},
+      BakMusic = #{bakmusic,jdbcType=NVARCHAR},
+      IsBakImg = #{isbakimg,jdbcType=BIT},
+      IsBakMusic = #{isbakmusic,jdbcType=BIT},
+      Copyright = #{copyright,jdbcType=NVARCHAR},
+      CopyrightUrl = #{copyrighturl,jdbcType=NVARCHAR},
+      TechSupport = #{techsupport,jdbcType=NVARCHAR},
+      TechSupportUrl = #{techsupporturl,jdbcType=NVARCHAR},
+      StatCode = #{statcode,jdbcType=NVARCHAR},
+      Sequence = #{sequence,jdbcType=INTEGER},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      next_openid = #{nextOpenid,jdbcType=NVARCHAR},
+      weitype = #{weitype,jdbcType=INTEGER},
+      Logo = #{logo,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.WContentMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.WContent" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SiteID" property="siteid" jdbcType="INTEGER" />
+    <result column="ColumnID" property="columnid" jdbcType="INTEGER" />
+    <result column="Title" property="title" jdbcType="NVARCHAR" />
+    <result column="Img" property="img" jdbcType="NVARCHAR" />
+    <result column="Summary" property="summary" jdbcType="NVARCHAR" />
+    <result column="Contents" property="contents" jdbcType="NVARCHAR" />
+    <result column="Keywords" property="keywords" jdbcType="NVARCHAR" />
+    <result column="Description" property="description" jdbcType="NVARCHAR" />
+    <result column="Sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="AddTime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="IsLonLat" property="islonlat" jdbcType="BIT" />
+    <result column="Longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="Latitude" property="latitude" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SiteID, ColumnID, Title, Img, Summary, Contents, Keywords, Description, Sequence, 
+    AddTime, IsLonLat, Longitude, Latitude
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.WContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.W_Content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.W_Content
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.W_Content
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.WContentExample" >
+    delete from dbo.W_Content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.WContent" >
+    insert into dbo.W_Content (ID, SiteID, ColumnID, 
+      Title, Img, Summary, 
+      Contents, Keywords, Description, 
+      Sequence, AddTime, IsLonLat, 
+      Longitude, Latitude)
+    values (#{id,jdbcType=INTEGER}, #{siteid,jdbcType=INTEGER}, #{columnid,jdbcType=INTEGER}, 
+      #{title,jdbcType=NVARCHAR}, #{img,jdbcType=NVARCHAR}, #{summary,jdbcType=NVARCHAR}, 
+      #{contents,jdbcType=NVARCHAR}, #{keywords,jdbcType=NVARCHAR}, #{description,jdbcType=NVARCHAR}, 
+      #{sequence,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{islonlat,jdbcType=BIT}, 
+      #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.WContent" >
+    insert into dbo.W_Content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="siteid != null" >
+        SiteID,
+      </if>
+      <if test="columnid != null" >
+        ColumnID,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="img != null" >
+        Img,
+      </if>
+      <if test="summary != null" >
+        Summary,
+      </if>
+      <if test="contents != null" >
+        Contents,
+      </if>
+      <if test="keywords != null" >
+        Keywords,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="sequence != null" >
+        Sequence,
+      </if>
+      <if test="addtime != null" >
+        AddTime,
+      </if>
+      <if test="islonlat != null" >
+        IsLonLat,
+      </if>
+      <if test="longitude != null" >
+        Longitude,
+      </if>
+      <if test="latitude != null" >
+        Latitude,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="siteid != null" >
+        #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="columnid != null" >
+        #{columnid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=NVARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=NVARCHAR},
+      </if>
+      <if test="contents != null" >
+        #{contents,jdbcType=NVARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islonlat != null" >
+        #{islonlat,jdbcType=BIT},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.WContentExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.W_Content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.W_Content
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteid != null" >
+        SiteID = #{record.siteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnid != null" >
+        ColumnID = #{record.columnid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.img != null" >
+        Img = #{record.img,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        Summary = #{record.summary,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.contents != null" >
+        Contents = #{record.contents,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        Keywords = #{record.keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sequence != null" >
+        Sequence = #{record.sequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.addtime != null" >
+        AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.islonlat != null" >
+        IsLonLat = #{record.islonlat,jdbcType=BIT},
+      </if>
+      <if test="record.longitude != null" >
+        Longitude = #{record.longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude != null" >
+        Latitude = #{record.latitude,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.W_Content
+    set ID = #{record.id,jdbcType=INTEGER},
+      SiteID = #{record.siteid,jdbcType=INTEGER},
+      ColumnID = #{record.columnid,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=NVARCHAR},
+      Img = #{record.img,jdbcType=NVARCHAR},
+      Summary = #{record.summary,jdbcType=NVARCHAR},
+      Contents = #{record.contents,jdbcType=NVARCHAR},
+      Keywords = #{record.keywords,jdbcType=NVARCHAR},
+      Description = #{record.description,jdbcType=NVARCHAR},
+      Sequence = #{record.sequence,jdbcType=INTEGER},
+      AddTime = #{record.addtime,jdbcType=TIMESTAMP},
+      IsLonLat = #{record.islonlat,jdbcType=BIT},
+      Longitude = #{record.longitude,jdbcType=DOUBLE},
+      Latitude = #{record.latitude,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.WContent" >
+    update dbo.W_Content
+    <set >
+      <if test="siteid != null" >
+        SiteID = #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="columnid != null" >
+        ColumnID = #{columnid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        Title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="img != null" >
+        Img = #{img,jdbcType=NVARCHAR},
+      </if>
+      <if test="summary != null" >
+        Summary = #{summary,jdbcType=NVARCHAR},
+      </if>
+      <if test="contents != null" >
+        Contents = #{contents,jdbcType=NVARCHAR},
+      </if>
+      <if test="keywords != null" >
+        Keywords = #{keywords,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="sequence != null" >
+        Sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        AddTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islonlat != null" >
+        IsLonLat = #{islonlat,jdbcType=BIT},
+      </if>
+      <if test="longitude != null" >
+        Longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        Latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.WContent" >
+    update dbo.W_Content
+    set SiteID = #{siteid,jdbcType=INTEGER},
+      ColumnID = #{columnid,jdbcType=INTEGER},
+      Title = #{title,jdbcType=NVARCHAR},
+      Img = #{img,jdbcType=NVARCHAR},
+      Summary = #{summary,jdbcType=NVARCHAR},
+      Contents = #{contents,jdbcType=NVARCHAR},
+      Keywords = #{keywords,jdbcType=NVARCHAR},
+      Description = #{description,jdbcType=NVARCHAR},
+      Sequence = #{sequence,jdbcType=INTEGER},
+      AddTime = #{addtime,jdbcType=TIMESTAMP},
+      IsLonLat = #{islonlat,jdbcType=BIT},
+      Longitude = #{longitude,jdbcType=DOUBLE},
+      Latitude = #{latitude,jdbcType=DOUBLE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

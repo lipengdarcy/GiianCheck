@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.ProjectremindMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.Projectremind" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ProjectID" property="projectid" jdbcType="INTEGER" />
+    <result column="ProjectName" property="projectname" jdbcType="NVARCHAR" />
+    <result column="StepID" property="stepid" jdbcType="INTEGER" />
+    <result column="IS_LOOK" property="isLook" jdbcType="INTEGER" />
+    <result column="StepName" property="stepname" jdbcType="NVARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CreateUserID" property="createuserid" jdbcType="NVARCHAR" />
+    <result column="RemindDescrip" property="reminddescrip" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ProjectID, ProjectName, StepID, IS_LOOK, StepName, CreateTime, CreateUserID, 
+    RemindDescrip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.ProjectremindExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.ProjectRemind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.ProjectRemind
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.ProjectRemind
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.ProjectremindExample" >
+    delete from dbo.ProjectRemind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.Projectremind" >
+    insert into dbo.ProjectRemind (ID, ProjectID, ProjectName, 
+      StepID, IS_LOOK, StepName, 
+      CreateTime, CreateUserID, RemindDescrip
+      )
+    values (#{id,jdbcType=INTEGER}, #{projectid,jdbcType=INTEGER}, #{projectname,jdbcType=NVARCHAR}, 
+      #{stepid,jdbcType=INTEGER}, #{isLook,jdbcType=INTEGER}, #{stepname,jdbcType=NVARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=NVARCHAR}, #{reminddescrip,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.Projectremind" >
+    insert into dbo.ProjectRemind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="projectid != null" >
+        ProjectID,
+      </if>
+      <if test="projectname != null" >
+        ProjectName,
+      </if>
+      <if test="stepid != null" >
+        StepID,
+      </if>
+      <if test="isLook != null" >
+        IS_LOOK,
+      </if>
+      <if test="stepname != null" >
+        StepName,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID,
+      </if>
+      <if test="reminddescrip != null" >
+        RemindDescrip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null" >
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="stepid != null" >
+        #{stepid,jdbcType=INTEGER},
+      </if>
+      <if test="isLook != null" >
+        #{isLook,jdbcType=INTEGER},
+      </if>
+      <if test="stepname != null" >
+        #{stepname,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="reminddescrip != null" >
+        #{reminddescrip,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.ProjectremindExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.ProjectRemind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.ProjectRemind
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectid != null" >
+        ProjectID = #{record.projectid,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectname != null" >
+        ProjectName = #{record.projectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.stepid != null" >
+        StepID = #{record.stepid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isLook != null" >
+        IS_LOOK = #{record.isLook,jdbcType=INTEGER},
+      </if>
+      <if test="record.stepname != null" >
+        StepName = #{record.stepname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserID = #{record.createuserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.reminddescrip != null" >
+        RemindDescrip = #{record.reminddescrip,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.ProjectRemind
+    set ID = #{record.id,jdbcType=INTEGER},
+      ProjectID = #{record.projectid,jdbcType=INTEGER},
+      ProjectName = #{record.projectname,jdbcType=NVARCHAR},
+      StepID = #{record.stepid,jdbcType=INTEGER},
+      IS_LOOK = #{record.isLook,jdbcType=INTEGER},
+      StepName = #{record.stepname,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      CreateUserID = #{record.createuserid,jdbcType=NVARCHAR},
+      RemindDescrip = #{record.reminddescrip,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.Projectremind" >
+    update dbo.ProjectRemind
+    <set >
+      <if test="projectid != null" >
+        ProjectID = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="projectname != null" >
+        ProjectName = #{projectname,jdbcType=NVARCHAR},
+      </if>
+      <if test="stepid != null" >
+        StepID = #{stepid,jdbcType=INTEGER},
+      </if>
+      <if test="isLook != null" >
+        IS_LOOK = #{isLook,jdbcType=INTEGER},
+      </if>
+      <if test="stepname != null" >
+        StepName = #{stepname,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID = #{createuserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="reminddescrip != null" >
+        RemindDescrip = #{reminddescrip,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.Projectremind" >
+    update dbo.ProjectRemind
+    set ProjectID = #{projectid,jdbcType=INTEGER},
+      ProjectName = #{projectname,jdbcType=NVARCHAR},
+      StepID = #{stepid,jdbcType=INTEGER},
+      IS_LOOK = #{isLook,jdbcType=INTEGER},
+      StepName = #{stepname,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      CreateUserID = #{createuserid,jdbcType=NVARCHAR},
+      RemindDescrip = #{reminddescrip,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

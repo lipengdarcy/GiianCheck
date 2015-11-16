@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.Project" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Title" property="title" jdbcType="NVARCHAR" />
+    <result column="NO" property="no" jdbcType="NVARCHAR" />
+    <result column="ToCompany" property="tocompany" jdbcType="NVARCHAR" />
+    <result column="ToTime" property="totime" jdbcType="TIMESTAMP" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="PType" property="ptype" jdbcType="INTEGER" />
+    <result column="ContractAmount" property="contractamount" jdbcType="NUMERIC" />
+    <result column="TheContact" property="thecontact" jdbcType="NVARCHAR" />
+    <result column="ContactPhone" property="contactphone" jdbcType="NVARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CreateUserID" property="createuserid" jdbcType="NVARCHAR" />
+    <result column="ProjectBz" property="projectbz" jdbcType="LONGNVARCHAR" />
+    <result column="PRemind" property="premind" jdbcType="INTEGER" />
+    <result column="ProjectMY" property="projectmy" jdbcType="LONGNVARCHAR" />
+    <result column="projectinfo" property="projectinfo" jdbcType="LONGNVARCHAR" />
+    <result column="Equipment" property="equipment" jdbcType="LONGNVARCHAR" />
+    <result column="zone" property="zone" jdbcType="LONGNVARCHAR" />
+    <result column="finishtime" property="finishtime" jdbcType="TIMESTAMP" />
+    <result column="finish" property="finish" jdbcType="INTEGER" />
+    <result column="ProjectBzList" property="projectbzlist" jdbcType="LONGNVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.witsafe.model.dbo.Project" extends="BaseResultMap" >
+    <result column="score" property="score" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Title, NO, ToCompany, ToTime, State, PType, ContractAmount, TheContact, ContactPhone, 
+    CreateTime, CreateUserID, ProjectBz, PRemind, ProjectMY, projectinfo, Equipment, 
+    zone, finishtime, finish, ProjectBzList
+  </sql>
+  <sql id="Blob_Column_List" >
+    score
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.witsafe.model.dbo.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dbo.Project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.Project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dbo.Project
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.Project
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.ProjectExample" >
+    delete from dbo.Project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.Project" >
+    insert into dbo.Project (ID, Title, NO, 
+      ToCompany, ToTime, State, 
+      PType, ContractAmount, TheContact, 
+      ContactPhone, CreateTime, CreateUserID, 
+      ProjectBz, PRemind, ProjectMY, 
+      projectinfo, Equipment, zone, 
+      finishtime, finish, ProjectBzList, 
+      score)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=NVARCHAR}, #{no,jdbcType=NVARCHAR}, 
+      #{tocompany,jdbcType=NVARCHAR}, #{totime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
+      #{ptype,jdbcType=INTEGER}, #{contractamount,jdbcType=NUMERIC}, #{thecontact,jdbcType=NVARCHAR}, 
+      #{contactphone,jdbcType=NVARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=NVARCHAR}, 
+      #{projectbz,jdbcType=LONGNVARCHAR}, #{premind,jdbcType=INTEGER}, #{projectmy,jdbcType=LONGNVARCHAR}, 
+      #{projectinfo,jdbcType=LONGNVARCHAR}, #{equipment,jdbcType=LONGNVARCHAR}, #{zone,jdbcType=LONGNVARCHAR}, 
+      #{finishtime,jdbcType=TIMESTAMP}, #{finish,jdbcType=INTEGER}, #{projectbzlist,jdbcType=LONGNVARCHAR}, 
+      #{score,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.Project" >
+    insert into dbo.Project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="no != null" >
+        NO,
+      </if>
+      <if test="tocompany != null" >
+        ToCompany,
+      </if>
+      <if test="totime != null" >
+        ToTime,
+      </if>
+      <if test="state != null" >
+        State,
+      </if>
+      <if test="ptype != null" >
+        PType,
+      </if>
+      <if test="contractamount != null" >
+        ContractAmount,
+      </if>
+      <if test="thecontact != null" >
+        TheContact,
+      </if>
+      <if test="contactphone != null" >
+        ContactPhone,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID,
+      </if>
+      <if test="projectbz != null" >
+        ProjectBz,
+      </if>
+      <if test="premind != null" >
+        PRemind,
+      </if>
+      <if test="projectmy != null" >
+        ProjectMY,
+      </if>
+      <if test="projectinfo != null" >
+        projectinfo,
+      </if>
+      <if test="equipment != null" >
+        Equipment,
+      </if>
+      <if test="zone != null" >
+        zone,
+      </if>
+      <if test="finishtime != null" >
+        finishtime,
+      </if>
+      <if test="finish != null" >
+        finish,
+      </if>
+      <if test="projectbzlist != null" >
+        ProjectBzList,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=NVARCHAR},
+      </if>
+      <if test="tocompany != null" >
+        #{tocompany,jdbcType=NVARCHAR},
+      </if>
+      <if test="totime != null" >
+        #{totime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ptype != null" >
+        #{ptype,jdbcType=INTEGER},
+      </if>
+      <if test="contractamount != null" >
+        #{contractamount,jdbcType=NUMERIC},
+      </if>
+      <if test="thecontact != null" >
+        #{thecontact,jdbcType=NVARCHAR},
+      </if>
+      <if test="contactphone != null" >
+        #{contactphone,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectbz != null" >
+        #{projectbz,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="premind != null" >
+        #{premind,jdbcType=INTEGER},
+      </if>
+      <if test="projectmy != null" >
+        #{projectmy,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="projectinfo != null" >
+        #{projectinfo,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="equipment != null" >
+        #{equipment,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="zone != null" >
+        #{zone,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="finishtime != null" >
+        #{finishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finish != null" >
+        #{finish,jdbcType=INTEGER},
+      </if>
+      <if test="projectbzlist != null" >
+        #{projectbzlist,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.ProjectExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.Project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.Project
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.no != null" >
+        NO = #{record.no,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tocompany != null" >
+        ToCompany = #{record.tocompany,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.totime != null" >
+        ToTime = #{record.totime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        State = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.ptype != null" >
+        PType = #{record.ptype,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractamount != null" >
+        ContractAmount = #{record.contractamount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.thecontact != null" >
+        TheContact = #{record.thecontact,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.contactphone != null" >
+        ContactPhone = #{record.contactphone,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserID = #{record.createuserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectbz != null" >
+        ProjectBz = #{record.projectbz,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="record.premind != null" >
+        PRemind = #{record.premind,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectmy != null" >
+        ProjectMY = #{record.projectmy,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="record.projectinfo != null" >
+        projectinfo = #{record.projectinfo,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="record.equipment != null" >
+        Equipment = #{record.equipment,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="record.zone != null" >
+        zone = #{record.zone,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="record.finishtime != null" >
+        finishtime = #{record.finishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.finish != null" >
+        finish = #{record.finish,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectbzlist != null" >
+        ProjectBzList = #{record.projectbzlist,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update dbo.Project
+    set ID = #{record.id,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=NVARCHAR},
+      NO = #{record.no,jdbcType=NVARCHAR},
+      ToCompany = #{record.tocompany,jdbcType=NVARCHAR},
+      ToTime = #{record.totime,jdbcType=TIMESTAMP},
+      State = #{record.state,jdbcType=INTEGER},
+      PType = #{record.ptype,jdbcType=INTEGER},
+      ContractAmount = #{record.contractamount,jdbcType=NUMERIC},
+      TheContact = #{record.thecontact,jdbcType=NVARCHAR},
+      ContactPhone = #{record.contactphone,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      CreateUserID = #{record.createuserid,jdbcType=NVARCHAR},
+      ProjectBz = #{record.projectbz,jdbcType=LONGNVARCHAR},
+      PRemind = #{record.premind,jdbcType=INTEGER},
+      ProjectMY = #{record.projectmy,jdbcType=LONGNVARCHAR},
+      projectinfo = #{record.projectinfo,jdbcType=LONGNVARCHAR},
+      Equipment = #{record.equipment,jdbcType=LONGNVARCHAR},
+      zone = #{record.zone,jdbcType=LONGNVARCHAR},
+      finishtime = #{record.finishtime,jdbcType=TIMESTAMP},
+      finish = #{record.finish,jdbcType=INTEGER},
+      ProjectBzList = #{record.projectbzlist,jdbcType=LONGNVARCHAR},
+      score = #{record.score,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.Project
+    set ID = #{record.id,jdbcType=INTEGER},
+      Title = #{record.title,jdbcType=NVARCHAR},
+      NO = #{record.no,jdbcType=NVARCHAR},
+      ToCompany = #{record.tocompany,jdbcType=NVARCHAR},
+      ToTime = #{record.totime,jdbcType=TIMESTAMP},
+      State = #{record.state,jdbcType=INTEGER},
+      PType = #{record.ptype,jdbcType=INTEGER},
+      ContractAmount = #{record.contractamount,jdbcType=NUMERIC},
+      TheContact = #{record.thecontact,jdbcType=NVARCHAR},
+      ContactPhone = #{record.contactphone,jdbcType=NVARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      CreateUserID = #{record.createuserid,jdbcType=NVARCHAR},
+      ProjectBz = #{record.projectbz,jdbcType=LONGNVARCHAR},
+      PRemind = #{record.premind,jdbcType=INTEGER},
+      ProjectMY = #{record.projectmy,jdbcType=LONGNVARCHAR},
+      projectinfo = #{record.projectinfo,jdbcType=LONGNVARCHAR},
+      Equipment = #{record.equipment,jdbcType=LONGNVARCHAR},
+      zone = #{record.zone,jdbcType=LONGNVARCHAR},
+      finishtime = #{record.finishtime,jdbcType=TIMESTAMP},
+      finish = #{record.finish,jdbcType=INTEGER},
+      ProjectBzList = #{record.projectbzlist,jdbcType=LONGNVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.Project" >
+    update dbo.Project
+    <set >
+      <if test="title != null" >
+        Title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="no != null" >
+        NO = #{no,jdbcType=NVARCHAR},
+      </if>
+      <if test="tocompany != null" >
+        ToCompany = #{tocompany,jdbcType=NVARCHAR},
+      </if>
+      <if test="totime != null" >
+        ToTime = #{totime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        State = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ptype != null" >
+        PType = #{ptype,jdbcType=INTEGER},
+      </if>
+      <if test="contractamount != null" >
+        ContractAmount = #{contractamount,jdbcType=NUMERIC},
+      </if>
+      <if test="thecontact != null" >
+        TheContact = #{thecontact,jdbcType=NVARCHAR},
+      </if>
+      <if test="contactphone != null" >
+        ContactPhone = #{contactphone,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID = #{createuserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectbz != null" >
+        ProjectBz = #{projectbz,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="premind != null" >
+        PRemind = #{premind,jdbcType=INTEGER},
+      </if>
+      <if test="projectmy != null" >
+        ProjectMY = #{projectmy,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="projectinfo != null" >
+        projectinfo = #{projectinfo,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="equipment != null" >
+        Equipment = #{equipment,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="zone != null" >
+        zone = #{zone,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="finishtime != null" >
+        finishtime = #{finishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finish != null" >
+        finish = #{finish,jdbcType=INTEGER},
+      </if>
+      <if test="projectbzlist != null" >
+        ProjectBzList = #{projectbzlist,jdbcType=LONGNVARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.witsafe.model.dbo.Project" >
+    update dbo.Project
+    set Title = #{title,jdbcType=NVARCHAR},
+      NO = #{no,jdbcType=NVARCHAR},
+      ToCompany = #{tocompany,jdbcType=NVARCHAR},
+      ToTime = #{totime,jdbcType=TIMESTAMP},
+      State = #{state,jdbcType=INTEGER},
+      PType = #{ptype,jdbcType=INTEGER},
+      ContractAmount = #{contractamount,jdbcType=NUMERIC},
+      TheContact = #{thecontact,jdbcType=NVARCHAR},
+      ContactPhone = #{contactphone,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      CreateUserID = #{createuserid,jdbcType=NVARCHAR},
+      ProjectBz = #{projectbz,jdbcType=LONGNVARCHAR},
+      PRemind = #{premind,jdbcType=INTEGER},
+      ProjectMY = #{projectmy,jdbcType=LONGNVARCHAR},
+      projectinfo = #{projectinfo,jdbcType=LONGNVARCHAR},
+      Equipment = #{equipment,jdbcType=LONGNVARCHAR},
+      zone = #{zone,jdbcType=LONGNVARCHAR},
+      finishtime = #{finishtime,jdbcType=TIMESTAMP},
+      finish = #{finish,jdbcType=INTEGER},
+      ProjectBzList = #{projectbzlist,jdbcType=LONGNVARCHAR},
+      score = #{score,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.Project" >
+    update dbo.Project
+    set Title = #{title,jdbcType=NVARCHAR},
+      NO = #{no,jdbcType=NVARCHAR},
+      ToCompany = #{tocompany,jdbcType=NVARCHAR},
+      ToTime = #{totime,jdbcType=TIMESTAMP},
+      State = #{state,jdbcType=INTEGER},
+      PType = #{ptype,jdbcType=INTEGER},
+      ContractAmount = #{contractamount,jdbcType=NUMERIC},
+      TheContact = #{thecontact,jdbcType=NVARCHAR},
+      ContactPhone = #{contactphone,jdbcType=NVARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      CreateUserID = #{createuserid,jdbcType=NVARCHAR},
+      ProjectBz = #{projectbz,jdbcType=LONGNVARCHAR},
+      PRemind = #{premind,jdbcType=INTEGER},
+      ProjectMY = #{projectmy,jdbcType=LONGNVARCHAR},
+      projectinfo = #{projectinfo,jdbcType=LONGNVARCHAR},
+      Equipment = #{equipment,jdbcType=LONGNVARCHAR},
+      zone = #{zone,jdbcType=LONGNVARCHAR},
+      finishtime = #{finishtime,jdbcType=TIMESTAMP},
+      finish = #{finish,jdbcType=INTEGER},
+      ProjectBzList = #{projectbzlist,jdbcType=LONGNVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

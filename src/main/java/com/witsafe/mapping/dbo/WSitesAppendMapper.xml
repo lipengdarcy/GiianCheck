@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.witsafe.dao.dbo.WSitesAppendMapper" >
+  <resultMap id="BaseResultMap" type="com.witsafe.model.dbo.WSitesAppend" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SiteID" property="siteid" jdbcType="INTEGER" />
+    <result column="TopTempIndex" property="toptempindex" jdbcType="INTEGER" />
+    <result column="FootTempIndex" property="foottempindex" jdbcType="INTEGER" />
+    <result column="LbsReply" property="lbsreply" jdbcType="INTEGER" />
+    <result column="TelTempIndex" property="teltempindex" jdbcType="INTEGER" />
+    <result column="MemberLookUrl" property="memberlookurl" jdbcType="NVARCHAR" />
+    <result column="MemberLookIsShow" property="memberlookisshow" jdbcType="INTEGER" />
+    <result column="AccountUserName" property="accountusername" jdbcType="NVARCHAR" />
+    <result column="AccountPassword" property="accountpassword" jdbcType="NVARCHAR" />
+    <result column="QrCodePath" property="qrcodepath" jdbcType="NVARCHAR" />
+    <result column="IndustryID" property="industryid" jdbcType="INTEGER" />
+    <result column="MerchantID" property="merchantid" jdbcType="NVARCHAR" />
+    <result column="IsOpenPrint" property="isopenprint" jdbcType="INTEGER" />
+    <result column="LastTimeSendMessage" property="lasttimesendmessage" jdbcType="TIMESTAMP" />
+    <result column="LastTimeJobProcess" property="lasttimejobprocess" jdbcType="TIMESTAMP" />
+    <result column="GUID" property="guid" jdbcType="NVARCHAR" />
+    <result column="FoodTempIndex" property="foodtempindex" jdbcType="INTEGER" />
+    <result column="SiteInfo" property="siteinfo" jdbcType="NVARCHAR" />
+    <result column="BrandImg" property="brandimg" jdbcType="NVARCHAR" />
+    <result column="IsToGo" property="istogo" jdbcType="INTEGER" />
+    <result column="Domain" property="domain" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SiteID, TopTempIndex, FootTempIndex, LbsReply, TelTempIndex, MemberLookUrl, MemberLookIsShow, 
+    AccountUserName, AccountPassword, QrCodePath, IndustryID, MerchantID, IsOpenPrint, 
+    LastTimeSendMessage, LastTimeJobProcess, GUID, FoodTempIndex, SiteInfo, BrandImg, 
+    IsToGo, Domain
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.witsafe.model.dbo.WSitesAppendExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dbo.W_Sites_Append
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.W_Sites_Append
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dbo.W_Sites_Append
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.witsafe.model.dbo.WSitesAppendExample" >
+    delete from dbo.W_Sites_Append
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.witsafe.model.dbo.WSitesAppend" >
+    insert into dbo.W_Sites_Append (ID, SiteID, TopTempIndex, 
+      FootTempIndex, LbsReply, TelTempIndex, 
+      MemberLookUrl, MemberLookIsShow, AccountUserName, 
+      AccountPassword, QrCodePath, IndustryID, 
+      MerchantID, IsOpenPrint, LastTimeSendMessage, 
+      LastTimeJobProcess, GUID, FoodTempIndex, 
+      SiteInfo, BrandImg, IsToGo, 
+      Domain)
+    values (#{id,jdbcType=INTEGER}, #{siteid,jdbcType=INTEGER}, #{toptempindex,jdbcType=INTEGER}, 
+      #{foottempindex,jdbcType=INTEGER}, #{lbsreply,jdbcType=INTEGER}, #{teltempindex,jdbcType=INTEGER}, 
+      #{memberlookurl,jdbcType=NVARCHAR}, #{memberlookisshow,jdbcType=INTEGER}, #{accountusername,jdbcType=NVARCHAR}, 
+      #{accountpassword,jdbcType=NVARCHAR}, #{qrcodepath,jdbcType=NVARCHAR}, #{industryid,jdbcType=INTEGER}, 
+      #{merchantid,jdbcType=NVARCHAR}, #{isopenprint,jdbcType=INTEGER}, #{lasttimesendmessage,jdbcType=TIMESTAMP}, 
+      #{lasttimejobprocess,jdbcType=TIMESTAMP}, #{guid,jdbcType=NVARCHAR}, #{foodtempindex,jdbcType=INTEGER}, 
+      #{siteinfo,jdbcType=NVARCHAR}, #{brandimg,jdbcType=NVARCHAR}, #{istogo,jdbcType=INTEGER}, 
+      #{domain,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.witsafe.model.dbo.WSitesAppend" >
+    insert into dbo.W_Sites_Append
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="siteid != null" >
+        SiteID,
+      </if>
+      <if test="toptempindex != null" >
+        TopTempIndex,
+      </if>
+      <if test="foottempindex != null" >
+        FootTempIndex,
+      </if>
+      <if test="lbsreply != null" >
+        LbsReply,
+      </if>
+      <if test="teltempindex != null" >
+        TelTempIndex,
+      </if>
+      <if test="memberlookurl != null" >
+        MemberLookUrl,
+      </if>
+      <if test="memberlookisshow != null" >
+        MemberLookIsShow,
+      </if>
+      <if test="accountusername != null" >
+        AccountUserName,
+      </if>
+      <if test="accountpassword != null" >
+        AccountPassword,
+      </if>
+      <if test="qrcodepath != null" >
+        QrCodePath,
+      </if>
+      <if test="industryid != null" >
+        IndustryID,
+      </if>
+      <if test="merchantid != null" >
+        MerchantID,
+      </if>
+      <if test="isopenprint != null" >
+        IsOpenPrint,
+      </if>
+      <if test="lasttimesendmessage != null" >
+        LastTimeSendMessage,
+      </if>
+      <if test="lasttimejobprocess != null" >
+        LastTimeJobProcess,
+      </if>
+      <if test="guid != null" >
+        GUID,
+      </if>
+      <if test="foodtempindex != null" >
+        FoodTempIndex,
+      </if>
+      <if test="siteinfo != null" >
+        SiteInfo,
+      </if>
+      <if test="brandimg != null" >
+        BrandImg,
+      </if>
+      <if test="istogo != null" >
+        IsToGo,
+      </if>
+      <if test="domain != null" >
+        Domain,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="siteid != null" >
+        #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="toptempindex != null" >
+        #{toptempindex,jdbcType=INTEGER},
+      </if>
+      <if test="foottempindex != null" >
+        #{foottempindex,jdbcType=INTEGER},
+      </if>
+      <if test="lbsreply != null" >
+        #{lbsreply,jdbcType=INTEGER},
+      </if>
+      <if test="teltempindex != null" >
+        #{teltempindex,jdbcType=INTEGER},
+      </if>
+      <if test="memberlookurl != null" >
+        #{memberlookurl,jdbcType=NVARCHAR},
+      </if>
+      <if test="memberlookisshow != null" >
+        #{memberlookisshow,jdbcType=INTEGER},
+      </if>
+      <if test="accountusername != null" >
+        #{accountusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="accountpassword != null" >
+        #{accountpassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="qrcodepath != null" >
+        #{qrcodepath,jdbcType=NVARCHAR},
+      </if>
+      <if test="industryid != null" >
+        #{industryid,jdbcType=INTEGER},
+      </if>
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=NVARCHAR},
+      </if>
+      <if test="isopenprint != null" >
+        #{isopenprint,jdbcType=INTEGER},
+      </if>
+      <if test="lasttimesendmessage != null" >
+        #{lasttimesendmessage,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttimejobprocess != null" >
+        #{lasttimejobprocess,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guid != null" >
+        #{guid,jdbcType=NVARCHAR},
+      </if>
+      <if test="foodtempindex != null" >
+        #{foodtempindex,jdbcType=INTEGER},
+      </if>
+      <if test="siteinfo != null" >
+        #{siteinfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="brandimg != null" >
+        #{brandimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="istogo != null" >
+        #{istogo,jdbcType=INTEGER},
+      </if>
+      <if test="domain != null" >
+        #{domain,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.witsafe.model.dbo.WSitesAppendExample" resultType="java.lang.Integer" >
+    select count(*) from dbo.W_Sites_Append
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dbo.W_Sites_Append
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteid != null" >
+        SiteID = #{record.siteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.toptempindex != null" >
+        TopTempIndex = #{record.toptempindex,jdbcType=INTEGER},
+      </if>
+      <if test="record.foottempindex != null" >
+        FootTempIndex = #{record.foottempindex,jdbcType=INTEGER},
+      </if>
+      <if test="record.lbsreply != null" >
+        LbsReply = #{record.lbsreply,jdbcType=INTEGER},
+      </if>
+      <if test="record.teltempindex != null" >
+        TelTempIndex = #{record.teltempindex,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberlookurl != null" >
+        MemberLookUrl = #{record.memberlookurl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.memberlookisshow != null" >
+        MemberLookIsShow = #{record.memberlookisshow,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountusername != null" >
+        AccountUserName = #{record.accountusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.accountpassword != null" >
+        AccountPassword = #{record.accountpassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.qrcodepath != null" >
+        QrCodePath = #{record.qrcodepath,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.industryid != null" >
+        IndustryID = #{record.industryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.merchantid != null" >
+        MerchantID = #{record.merchantid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isopenprint != null" >
+        IsOpenPrint = #{record.isopenprint,jdbcType=INTEGER},
+      </if>
+      <if test="record.lasttimesendmessage != null" >
+        LastTimeSendMessage = #{record.lasttimesendmessage,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lasttimejobprocess != null" >
+        LastTimeJobProcess = #{record.lasttimejobprocess,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.guid != null" >
+        GUID = #{record.guid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.foodtempindex != null" >
+        FoodTempIndex = #{record.foodtempindex,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteinfo != null" >
+        SiteInfo = #{record.siteinfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.brandimg != null" >
+        BrandImg = #{record.brandimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.istogo != null" >
+        IsToGo = #{record.istogo,jdbcType=INTEGER},
+      </if>
+      <if test="record.domain != null" >
+        Domain = #{record.domain,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dbo.W_Sites_Append
+    set ID = #{record.id,jdbcType=INTEGER},
+      SiteID = #{record.siteid,jdbcType=INTEGER},
+      TopTempIndex = #{record.toptempindex,jdbcType=INTEGER},
+      FootTempIndex = #{record.foottempindex,jdbcType=INTEGER},
+      LbsReply = #{record.lbsreply,jdbcType=INTEGER},
+      TelTempIndex = #{record.teltempindex,jdbcType=INTEGER},
+      MemberLookUrl = #{record.memberlookurl,jdbcType=NVARCHAR},
+      MemberLookIsShow = #{record.memberlookisshow,jdbcType=INTEGER},
+      AccountUserName = #{record.accountusername,jdbcType=NVARCHAR},
+      AccountPassword = #{record.accountpassword,jdbcType=NVARCHAR},
+      QrCodePath = #{record.qrcodepath,jdbcType=NVARCHAR},
+      IndustryID = #{record.industryid,jdbcType=INTEGER},
+      MerchantID = #{record.merchantid,jdbcType=NVARCHAR},
+      IsOpenPrint = #{record.isopenprint,jdbcType=INTEGER},
+      LastTimeSendMessage = #{record.lasttimesendmessage,jdbcType=TIMESTAMP},
+      LastTimeJobProcess = #{record.lasttimejobprocess,jdbcType=TIMESTAMP},
+      GUID = #{record.guid,jdbcType=NVARCHAR},
+      FoodTempIndex = #{record.foodtempindex,jdbcType=INTEGER},
+      SiteInfo = #{record.siteinfo,jdbcType=NVARCHAR},
+      BrandImg = #{record.brandimg,jdbcType=NVARCHAR},
+      IsToGo = #{record.istogo,jdbcType=INTEGER},
+      Domain = #{record.domain,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.witsafe.model.dbo.WSitesAppend" >
+    update dbo.W_Sites_Append
+    <set >
+      <if test="siteid != null" >
+        SiteID = #{siteid,jdbcType=INTEGER},
+      </if>
+      <if test="toptempindex != null" >
+        TopTempIndex = #{toptempindex,jdbcType=INTEGER},
+      </if>
+      <if test="foottempindex != null" >
+        FootTempIndex = #{foottempindex,jdbcType=INTEGER},
+      </if>
+      <if test="lbsreply != null" >
+        LbsReply = #{lbsreply,jdbcType=INTEGER},
+      </if>
+      <if test="teltempindex != null" >
+        TelTempIndex = #{teltempindex,jdbcType=INTEGER},
+      </if>
+      <if test="memberlookurl != null" >
+        MemberLookUrl = #{memberlookurl,jdbcType=NVARCHAR},
+      </if>
+      <if test="memberlookisshow != null" >
+        MemberLookIsShow = #{memberlookisshow,jdbcType=INTEGER},
+      </if>
+      <if test="accountusername != null" >
+        AccountUserName = #{accountusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="accountpassword != null" >
+        AccountPassword = #{accountpassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="qrcodepath != null" >
+        QrCodePath = #{qrcodepath,jdbcType=NVARCHAR},
+      </if>
+      <if test="industryid != null" >
+        IndustryID = #{industryid,jdbcType=INTEGER},
+      </if>
+      <if test="merchantid != null" >
+        MerchantID = #{merchantid,jdbcType=NVARCHAR},
+      </if>
+      <if test="isopenprint != null" >
+        IsOpenPrint = #{isopenprint,jdbcType=INTEGER},
+      </if>
+      <if test="lasttimesendmessage != null" >
+        LastTimeSendMessage = #{lasttimesendmessage,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttimejobprocess != null" >
+        LastTimeJobProcess = #{lasttimejobprocess,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guid != null" >
+        GUID = #{guid,jdbcType=NVARCHAR},
+      </if>
+      <if test="foodtempindex != null" >
+        FoodTempIndex = #{foodtempindex,jdbcType=INTEGER},
+      </if>
+      <if test="siteinfo != null" >
+        SiteInfo = #{siteinfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="brandimg != null" >
+        BrandImg = #{brandimg,jdbcType=NVARCHAR},
+      </if>
+      <if test="istogo != null" >
+        IsToGo = #{istogo,jdbcType=INTEGER},
+      </if>
+      <if test="domain != null" >
+        Domain = #{domain,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.witsafe.model.dbo.WSitesAppend" >
+    update dbo.W_Sites_Append
+    set SiteID = #{siteid,jdbcType=INTEGER},
+      TopTempIndex = #{toptempindex,jdbcType=INTEGER},
+      FootTempIndex = #{foottempindex,jdbcType=INTEGER},
+      LbsReply = #{lbsreply,jdbcType=INTEGER},
+      TelTempIndex = #{teltempindex,jdbcType=INTEGER},
+      MemberLookUrl = #{memberlookurl,jdbcType=NVARCHAR},
+      MemberLookIsShow = #{memberlookisshow,jdbcType=INTEGER},
+      AccountUserName = #{accountusername,jdbcType=NVARCHAR},
+      AccountPassword = #{accountpassword,jdbcType=NVARCHAR},
+      QrCodePath = #{qrcodepath,jdbcType=NVARCHAR},
+      IndustryID = #{industryid,jdbcType=INTEGER},
+      MerchantID = #{merchantid,jdbcType=NVARCHAR},
+      IsOpenPrint = #{isopenprint,jdbcType=INTEGER},
+      LastTimeSendMessage = #{lasttimesendmessage,jdbcType=TIMESTAMP},
+      LastTimeJobProcess = #{lasttimejobprocess,jdbcType=TIMESTAMP},
+      GUID = #{guid,jdbcType=NVARCHAR},
+      FoodTempIndex = #{foodtempindex,jdbcType=INTEGER},
+      SiteInfo = #{siteinfo,jdbcType=NVARCHAR},
+      BrandImg = #{brandimg,jdbcType=NVARCHAR},
+      IsToGo = #{istogo,jdbcType=INTEGER},
+      Domain = #{domain,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
