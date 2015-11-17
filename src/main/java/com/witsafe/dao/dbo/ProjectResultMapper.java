@@ -2,10 +2,19 @@ package com.witsafe.dao.dbo;
 
 import com.witsafe.model.dbo.ProjectResult;
 import com.witsafe.model.dbo.ProjectResultExample;
+import com.witsafe.model.dbo.ext.ProjectResultExt;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ProjectResultMapper {
+	
+	
+	@Select("select * from dbo.Project_Result where ID=#{id}") 
+	public ProjectResult selectTest(Integer id);
+	
     int countByExample(ProjectResultExample example);
 
     int deleteByExample(ProjectResultExample example);
@@ -16,7 +25,7 @@ public interface ProjectResultMapper {
 
     int insertSelective(ProjectResult record);
 
-    List<ProjectResult> selectByExample(ProjectResultExample example);
+    List<ProjectResultExt> selectByExample(ProjectResultExample example);
 
     ProjectResult selectByPrimaryKey(Integer id);
 

@@ -1,66 +1,33 @@
 select * from dbo.Dept; -- 部门
 select * from dbo.Member; -- 人员
 select * from dbo.Project; -- 项目
+select * from dbo.Project_User; -- 项目review
 select * from dbo.Project_review; -- 项目review
+select * from dbo.Project_result; -- 项目review
+
+select * from dbo.Project_step; -- 项目review
+
+select c.* from dbo.Dept a, dbo.Member b, dbo.Project c, dbo.Project_User d
+where a.ID = b.DeptID and b.OpenID = d.ToUserID 
+and c.ID = d.ProjectID and b.Telephone = '18858101357' and b.Password = 'pf5775923';
+
+   
+
+
 
 
 -- sql server
 -- 1、获取所有用户名: 
+Select name FROM Sysusers where status='2' and islogin='1';
 
-Select name FROM Sysusers where status='2' and islogin='1' islogin='1';
+islogin='1' :表示帐户
+islogin='0' :表示角色
+status='2' :表示用户帐户
+status='0' :表示糸统帐户
 
- 
-
- 
-
-:
-
-表示帐户
-
- 
-
-islogin='0' 
-
- 
-
- 
-
-:
-
-表示角色
-
- 
-
-status='2' 
-
- 
-
- 
-
-:
-
-表示用户帐户
-
- 
-
-status='0' 
-
- 
-
- 
-
-:
-
-表示糸统帐户
-
- 
-
- 
 
 --2、获取所有数据库名: 
 Select Name FROM Master..SysDatabases orDER BY Name ;
-
- 
 
 --3、获取所有表名: 
 Select Name FROM WX_JianAn..SysObjects Where XType='U' order BY Name ;
@@ -94,76 +61,21 @@ THEN 'PK' ELSE '' END,
 字段类型=type_name(b.xusertype)+CASE WHEN 
 
 b.colstat&1=1 THEN '[ID(' + 
-CONVERT(varchar, ident_seed(a.name))+','+CONVERT(varchar,ident_incr(a.name))+')]' ELSE '' 
-END, 
-
- 
-
- 
+CONVERT(varchar, ident_seed(a.name))+','+CONVERT(varchar,ident_incr(a.name))+')]' ELSE '' END, 
 
 长度=b.length, 
-
- 
-
- 
-
- 
-
 允许空=CASE b.isnullable WHEN 0 THEN 'N' ELSE 'Y' END, 
-
- 
-
- 
-
- 
-
 默认值=isnull(e.text, ''), 
 字段说明=isnull(c.value, '') 
 FROM sysobjects a, syscolumns b 
 LEFT OUTER JOIN sysproperties c ON b.id = c.id AND b.colid = c.smallid 
 LEFT OUTER JOIN syscomments e ON b.cdefault = e.id 
-LEFT 
-OUTER 
-
-JOIN 
-(Select 
-
-g.id, 
-
-g.colid 
-
-FROM 
-
-sysindexes 
-
-f, 
-
-sysindexkeys 
-
-g 
-
-Where 
-
-(f.id=g.id)AND(f.indid=g.indid)AND(f.indid>0)AND(f.indid<255)AND(f.status&2048)<>0) 
-
-h 
-
+LEFT OUTER JOIN 
+(Select g.id, g.colid 
+FROM sysindexes f, sysindexkeys g 
+Where (f.id=g.id)AND(f.indid=g.indid)AND(f.indid>0)AND(f.indid<255)AND(f.status&2048)<>0) h 
 ON (b.id=h.id)AND(b.colid=h.colid) 
-
-Where (a.id=b.id)AND(a.id=object_id('
-
-要查询的表
-
-')) 
-
- 
-
---
-
-要查询的表改成你要查询表的名称
-
- 
-
+Where (a.id=b.id)AND(a.id=object_id('要查询的表')) 
 orDER BY b.colid 
 
 
