@@ -108,12 +108,12 @@
 				<img src="${ctx}/static/example/profile.jpg" alt="User Photo" />
 			</div>
 			<div id="mws-user-functions">
-				<div id="mws-username">欢迎你, <span>123</span></div>
+				<div id="mws-username">欢迎你, <span>${sessionScope.user}</span></div>
 				<ul>
 					<li><a href="#">[个人中心]</a></li>
 					<li><a href="#">[密码更改]</a></li>
 					<li><a href="javascript:void(0)"
-						onclick="window.parent.location.href='${ctx }/home/logout'">[退出]</a></li>
+						onclick="window.parent.location.href='${ctx }/logout'">[退出]</a></li>
 				</ul>
 			</div>
 		</div>

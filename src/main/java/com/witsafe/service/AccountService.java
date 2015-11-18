@@ -43,6 +43,13 @@ public class AccountService {
 	public Member selectByPrimaryKey(String openid) {
 		return memberMapper.selectByPrimaryKey(openid);
 	}
+	
+	/**
+	 * 修改用户信息（密码修改）
+	 */
+	public int updateUser(Member member) {
+		return memberMapper.updateByPrimaryKeySelective(member);
+	}
 
 	/**
 	 * 用户登录

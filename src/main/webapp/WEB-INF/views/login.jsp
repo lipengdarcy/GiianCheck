@@ -94,7 +94,7 @@
 	function login(){
 		
 		$.ajax({
-			url : '${ctx }/home/login',
+			url : '${ctx }/login',
 			data : $("#form").serialize(),
 			type : 'post',
 			dataType : 'xml',

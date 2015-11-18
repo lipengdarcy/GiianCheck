@@ -9,6 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.witsafe.framework.common.Constant;
 import com.witsafe.model.common.StatusHtml;
 
 /**
@@ -22,18 +23,6 @@ public class ControllerInterceptor implements HandlerInterceptor {
 	private static Logger loggererror = Logger.getLogger("ErrorLogger");
 	private static Logger loggerinfo = Logger.getLogger("InfoLogger");
 
-	/*
-	 * // 利用正则映射到需要拦截的路径
-	 * 
-	 * @Value("${cfg.client.ips}") private String clientIPs;
-	 * 
-	 * // 登陆超时和状态
-	 * 
-	 * @Value("${msg.admin.timeout}") private String adminTimeOut;
-	 * 
-	 * @Value("${msg.admin.currentuser}") private String admincurrentuser;
-	 */
-
 	/**
 	 * 在业务处理器处理请求之前被调用 如果返回false 从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链
 	 * 如果返回true 执行下一个拦截器,直到所有的拦截器都执行完毕 再执行被拦截的Controller 然后进入拦截器链,
@@ -42,7 +31,6 @@ public class ControllerInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		String ip = request.getRemoteHost().toString();
-		// loggerinfo.info("==========[ControllerInterceptor] 1:preHandle...");
 		if (!request.getRequestURL().toString().contains("login")) {
 
 			/*
@@ -51,7 +39,7 @@ public class ControllerInterceptor implements HandlerInterceptor {
 			 * .forward(request, response); return false; } else {
 			 */
 			// 如果session中没有user对象
-			if (null == request.getSession().getAttribute("adminuser")) {
+			if (null == request.getSession().getAttribute(Constant.ACCOUNT_SESSION_UID)) {
 				String requestedWith = request.getHeader("x-requested-with");
 				// ajax请求
 				if (requestedWith != null
@@ -64,16 +52,13 @@ public class ControllerInterceptor implements HandlerInterceptor {
 					response.getWriter().print(JSON.toJSONString(statusHtml));
 				} else {
 					// 普通页面请求
-					response.sendRedirect(request.getContextPath()
-							+ "/admin/login.do");
+					response.sendRedirect(request.getContextPath() + "/login");
 				}
 				return false;
 			}
-			return true;
-			/* } */
-		} else {
-			return true;
+
 		}
+		return true;
 
 	}
 
