@@ -113,7 +113,7 @@
 					<li><a href="#">[个人中心]</a></li>
 					<li><a href="${ctx }/changePasswordPage">[密码更改]</a></li>
 					<li><a href="javascript:void(0)"
-						onclick="window.parent.location.href='${ctx }/logout'">[退出]</a></li>
+						onclick="window.parent.location.href='${ctx }/a/b/c/logout'">[退出]</a></li>
 				</ul>
 			</div>
 		</div>

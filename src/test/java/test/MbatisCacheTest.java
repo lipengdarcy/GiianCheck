@@ -25,6 +25,6 @@ public class MbatisCacheTest {
         // session close以后,仍然使用同一个db connection
         session.close();
         session = factory.openSession();
-        System.out.println(session.selectOne("selectUserByID", 1));
+        System.out.println(session.selectOne("selectUserByID", 1)); 
     }
 }

@@ -10,6 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+@SuppressWarnings("restriction")
 public class HMAC {
 	/**
 	 * 定义加密方式 MAC算法可选以下多种算法

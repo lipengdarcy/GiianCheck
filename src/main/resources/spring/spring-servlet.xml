@@ -92,9 +92,10 @@
 	<mvc:interceptors>
 		<!-- 多个拦截器,顺序执行 -->
 		<mvc:interceptor>
-			<!-- 如果不配置或/*,将拦截所有的Controller 后台拦截器 -->
-			<!-- <mvc:mapping path="/*" /> -->
-			<mvc:mapping path="/home/**" />			
+			<!-- /*：拦截/a  /**：拦截/a和/a/b  -->
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/static/**" />
+			<!-- <mvc:mapping path="/home/**" /> -->
 			<bean
 				class="com.witsafe.framework.common.interprecetor.ControllerInterceptor"></bean>
 		</mvc:interceptor>

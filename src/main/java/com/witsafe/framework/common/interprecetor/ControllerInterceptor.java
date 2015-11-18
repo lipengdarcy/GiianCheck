@@ -12,52 +12,33 @@ import com.alibaba.fastjson.JSON;
 import com.witsafe.framework.common.Constant;
 import com.witsafe.model.common.StatusHtml;
 
-/**
- * @Description TODO
- * @author 赵威
- * @date 2014-9-23 下午4:03:34
- * @version V1.0
- */
 @Component
 public class ControllerInterceptor implements HandlerInterceptor {
-	private static Logger loggererror = Logger.getLogger("ErrorLogger");
-	private static Logger loggerinfo = Logger.getLogger("InfoLogger");
 
-	/**
-	 * 在业务处理器处理请求之前被调用 如果返回false 从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链
-	 * 如果返回true 执行下一个拦截器,直到所有的拦截器都执行完毕 再执行被拦截的Controller 然后进入拦截器链,
-	 * 从最后一个拦截器往回执行所有的postHandle() 接着再从最后一个拦截器往回执行所有的afterCompletion()
-	 */
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		String ip = request.getRemoteHost().toString();
-		if (!request.getRequestURL().toString().contains("login")) {
-
-			/*
-			 * if (clientIPs == null || !ip.matches(clientIPs)) {
-			 * request.getRequestDispatcher("/view/error/interceptor.jsp")
-			 * .forward(request, response); return false; } else {
-			 */
-			// 如果session中没有user对象
-			if (null == request.getSession().getAttribute(Constant.ACCOUNT_SESSION_UID)) {
-				String requestedWith = request.getHeader("x-requested-with");
-				// ajax请求
-				if (requestedWith != null
-						&& "XMLHttpRequest".equals(requestedWith)) {
-					StatusHtml statusHtml = new StatusHtml();
-					statusHtml.setStatusCode("301");
-					statusHtml.setMessage("登录超时！");
-					statusHtml.setCallbackType("closeCurrent");
-					response.setHeader("session-status", "timeout");
-					response.getWriter().print(JSON.toJSONString(statusHtml));
-				} else {
-					// 普通页面请求
-					response.sendRedirect(request.getContextPath() + "/login");
-				}
-				return false;
+		//拦截除了登录的其他请求
+		if (!request.getServletPath().equals("/login")) {
+		// 如果session中没有user对象
+		if (null == request.getSession().getAttribute(
+				Constant.ACCOUNT_SESSION_UID)) {
+			String requestedWith = request.getHeader("x-requested-with");
+			// ajax请求
+			if (requestedWith != null && "XMLHttpRequest".equals(requestedWith)) {
+				StatusHtml statusHtml = new StatusHtml();
+				statusHtml.setStatusCode("301");
+				statusHtml.setMessage("登录超时！");
+				statusHtml.setCallbackType("closeCurrent");
+				response.setHeader("session-status", "timeout");
+				response.getWriter().print(JSON.toJSONString(statusHtml));
+			} else {
+				// 普通页面请求
+				response.sendRedirect(request.getContextPath() + "/login");
 			}
-
+			return false;
 		}
+		}
+
 		return true;
 
 	}

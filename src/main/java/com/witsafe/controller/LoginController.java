@@ -58,9 +58,10 @@ public class LoginController {
 	/**
 	 * 用户退出
 	 */
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "/a/b/c/logout")
 	public String logout(ModelMap m, HttpSession session) {
 		session.removeAttribute("user");
+		session.removeAttribute(Constant.ACCOUNT_SESSION_UID);
 		log.info("用户退出成功！");
 		return "redirect:/login";
 

@@ -26,6 +26,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * @file UploadFileUtils.java
  * @version 1.0
  */
+@SuppressWarnings("restriction")
 public abstract class UploadFileUtils {
 
 	// 上传文件保存路径

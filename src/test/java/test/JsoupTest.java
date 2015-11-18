@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.Map;
 
 import org.jsoup.Connection;
@@ -18,7 +17,6 @@ import com.witsafe.framework.common.Constant;
 import com.witsafe.framework.common.util.HtmlUtil;
 import com.witsafe.model.Nationstandard;
 import com.witsafe.model.NationstandardWithBLOBs;
-import com.witsafe.service.NationstandardService;
 
 public class JsoupTest implements Runnable {
 	

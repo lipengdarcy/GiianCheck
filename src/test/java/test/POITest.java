@@ -228,6 +228,7 @@ public class POITest {
 			if (fileOut != null) {
 				try {
 					fileOut.close();
+					wb.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -162,6 +162,7 @@ public class JspToHtml {
 				OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 				osw.write(str);
 				osw.flush();
+				osw.close();
 			}
 
 			return true;

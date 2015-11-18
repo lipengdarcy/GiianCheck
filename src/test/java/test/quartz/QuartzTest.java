@@ -19,6 +19,7 @@ public class QuartzTest {
 				"spring/spring-servlet.xml");
 		// 如果配置文件中将startQuertz bean的lazy-init设置为false 则不用实例化
 		// context.getBean("startQuertz");
+		
 		System.out.print("Test end..");
 
 	}

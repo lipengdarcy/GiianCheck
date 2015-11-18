@@ -18,6 +18,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * @将文件转化为缩略图
  *
  */
+@SuppressWarnings("restriction")
 public class ImgThumbUtil {
 
 	private static final String BMP = "bmp";
@@ -157,6 +158,7 @@ public class ImgThumbUtil {
 		return image;
 	}
 
+	@SuppressWarnings("restriction")
 	private static void writeFile(Image image, int width, int height,
 			String thumbnailFile) throws Exception {
 
