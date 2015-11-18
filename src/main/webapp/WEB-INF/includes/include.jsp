@@ -88,17 +88,21 @@
 	src="${ctx}/static/plugins/jquery.mousewheel.js"></script>
 <script type="text/javascript"
 	src="${ctx}/static/plugins/spinner/ui.spinner.js"></script>
+	
 <!-- 对话框插件  -->
+<link rel="stylesheet" type="text/css"
+	href="${ctx }/static/plugins/art-dialog/ui-dialog.css" />
 <script type="text/javascript"
 	src="${ctx }/static/plugins/art-dialog/dialog-min.js"></script>
+	
 <!-- form验证插件  -->
 <script type="text/javascript"
-	src="${ctx }/static/js/jquery.validationEngine.js"></script>	
+	src="${ctx }/static/js/jquery.validationEngine.js"></script>
 <script type="text/javascript"
-	src="${ctx }/static/js/jquery.validationEngine-zh_CN.js"></script>	
+	src="${ctx }/static/js/jquery.validationEngine-zh_CN.js"></script>
 
 <script type="text/javascript"
-	src="${ctx }/static/plugins/validate/jquery.validate.js"></script>		
+	src="${ctx }/static/plugins/validate/jquery.validate.js"></script>
 
 
 

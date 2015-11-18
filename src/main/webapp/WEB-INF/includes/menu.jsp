@@ -14,10 +14,7 @@
 	<div id="mws-navigation">
 		<ul>
 			<li><a href="${ctx }/home/getProject" class="mws-i-24 i-home">待办任务</a></li>
-			
-			<li><a href="${ctx }/static/icons.html"
-				class="mws-i-24 i-pacman"> Icons <span class="mws-nav-tooltip">2000+</span>
-			</a></li>
+						
 		</ul>
 	</div>
 </div>

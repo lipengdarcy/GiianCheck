@@ -70,7 +70,7 @@ public class LoginController {
 	/**
 	 * 修改密码页面
 	 */
-	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+	@RequestMapping(value = "/changePasswordPage", method = RequestMethod.GET)
 	public String changePasswordPage(ModelMap m) {
 		return "changePassword";
 	}
@@ -86,7 +86,7 @@ public class LoginController {
 		
 		String openid = (String) session.getAttribute(Constant.ACCOUNT_SESSION_UID);
 		record.setOpenid(openid);
-		record.setPassword(newPassword);
+		
 		Member member = accountService.isLoginSuccess(record.getTelephone(), record.getPassword());
 		if(member==null){
 			data.setCode(-1);
@@ -94,6 +94,7 @@ public class LoginController {
 			data.setContent("原密码输入错误！");
 			return data;
 		}
+		record.setPassword(newPassword);
 		
 		try {
 			int count = accountService.updateUser(record);
