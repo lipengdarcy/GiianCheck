@@ -12,7 +12,7 @@
 
 
 
-<title>项目结果</title>
+<title>项目结果编辑</title>
 </head>
 
 <body>
@@ -31,67 +31,35 @@
 
 
 
-
-				<!--1.待办任务 begin -->
 				<div class="mws-panel grid_8">
 					<div class="mws-panel-header">
-						<span class="mws-i-24 i-table-1">项目结果</span>
-					</div>
-					<div class="mws-panel-body">
-						<table class="mws-datatable-fn mws-table">
-							<thead>
-								<tr>
-									<th>结果内容</th>
-									<th>结果结论</th>
-									<th>结果创建人</th>
-									<th>结果创建时间</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<c:forEach items="${projectResultList}" var="item">
-									<tr class="gradeA">
-										<td>${item.result}</td>
-										<td>${item.conclusion}</td>
-										<td>${item.member.names}</td>
-										<td><fmt:formatDate value="${item.createtime}"
-												pattern="yyyy-MM-dd" /></td>
-										<td><a onclick="deleteResult(${item.id})" href="">删除</a>
-										<a href="${ctx}/home/getProjectResultDetail?id=${item.id}">编辑</a>
-										</td>
-
-									</tr>
-								</c:forEach>
-
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!--1.待办任务 end -->
-
-
-				<div class="mws-panel grid_8">
-					<div class="mws-panel-header">
-						<span class="mws-i-24 i-text-styling-3">新增结果</span>
+						<span class="mws-i-24 i-text-styling-3">项目结果详情</span>
 					</div>
 					<div class="mws-panel-body">
 						<form class="mws-form" id="form" action="">
-							<input type="hidden" name="projectid" value="${projectid}" /> <input
-								type="hidden" name="quarterid" value="${quarterid}" />
-
+							<input type="hidden" name="id" value="${projectResult.id}" /> 
 
 							<div class="mws-form-inline">
+															
+								<div class="mws-form-row">
+									<label>结果创建时间:</label>
+									<div class="mws-form-item">
+									 
+										<input type="text" disabled="disabled"  value="<fmt:formatDate value="${projectResult.createtime}"
+												pattern="yyyy-MM-dd HH:mm:ss" />" class="mws-textinput" />										
+									</div>
+								</div>
+								
 								<div class="mws-form-row">
 									<label>结果:</label>
 									<div class="mws-form-item">
-										<textarea id="elm1" name="result" class="xheditor-mfull"></textarea>
+										<textarea id="elm1" name="result" class="xheditor-mfull">${projectResult.result}</textarea>
 									</div>
 								</div>
 								<div class="mws-form-row">
 									<label>检测结论:</label>
 									<div class="mws-form-item medium">
-										<input type="text" name="conclusion" class="mws-textinput" />
+										<input type="text" name="conclusion" value="${projectResult.conclusion}" class="mws-textinput" />
 									</div>
 								</div>
 								<div class="mws-button-row">

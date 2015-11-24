@@ -7,6 +7,8 @@
 	<packaging>war</packaging>
 	<name>安职环保云平台</name>
 
+	<!-- Web项目部署到tomcat服务器 mvn tomcat7:deploy -Dmaven.test.skip=true 其中-Dmaven.test.skip=true表示临时性跳过测试代码的编译（ -->
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,6 +19,19 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- activemq消息队列 -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>5.12.1</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.12.1</version>			
+		</dependency> -->
 
 		<dependency>
 			<groupId>commons-dbutils</groupId>
@@ -30,7 +45,7 @@
 			<version>13.0.1</version>
 		</dependency>
 
-		
+
 
 		<!-- snaker工作流引擎 -->
 		<dependency>
@@ -67,12 +82,6 @@
 			<version>5.5.7</version>
 		</dependency>
 
-		<!-- http通信 -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -144,14 +153,12 @@
 			<version>7.0.0</version>
 		</dependency>
 
-
+		<!-- http通信 -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient-cache</artifactId>
@@ -382,7 +389,8 @@
 
 	<build>
 		<plugins>
-			<!-- maven编译的jdk'版本 -->
+
+			<!-- 编译插件 maven编译的jdk'版本 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -390,8 +398,14 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+					<compilerArguments>
+						<verbose />
+						<bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
+					</compilerArguments>
 				</configuration>
 			</plugin>
+
 
 			<!-- mybatis.generator 自动生成model,mapper,xml -->
 			<plugin>
@@ -403,6 +417,21 @@
 					<overwrite>true</overwrite>
 				</configuration>
 			</plugin>
+
+			<!-- 自动部署到tomcat插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<path>GiianCheck</path>
+					<!-- <url>http://115.29.207.187:8088/manager</url> -->
+					<url>http://localhost:8080/manager/text</url>
+					<server>tomcat</server>
+				</configuration>
+			</plugin>
+
+
 
 		</plugins>
 	</build>
@@ -421,8 +450,22 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
+		<repository>
+			<id>people.apache.snapshots</id>
+			<url>http://repository.apache.org/content/groups/snapshots-group/  </url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
 	</repositories>
+
 	<pluginRepositories>
+
 		<pluginRepository>
 			<id>maven-local</id>
 			<name>本地Nexus maven插件仓库</name>
@@ -434,5 +477,20 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
+
+		<pluginRepository>
+			<id>apache.snapshots</id>
+			<name>Apache Snapshots</name>
+			<url>http://repository.apache.org/content/groups/snapshots-group/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+
 	</pluginRepositories>
+
+
 </project>

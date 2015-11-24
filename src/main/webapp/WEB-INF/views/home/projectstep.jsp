@@ -61,7 +61,7 @@
 										<td><fmt:formatDate value="${item.createtime}"
 												pattern="yyyy-MM-dd" /></td>
 										<td>
-										<a href="${ctx}/home/getProjectResult?projectid=${item.projectid}&qid=${item.id}">项目结果</a>
+										<a href="${ctx}/home/getProjectResult?projectid=${item.projectid}&quarterid=${item.id}">项目结果</a>
 										</td>
 										
 									</tr>

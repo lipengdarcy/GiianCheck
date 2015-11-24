@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/includes/commons/taglibs.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -10,14 +10,18 @@
 <script type="text/javascript" src="${ctx}/static/js/demo.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/themer.js"></script>
 
-<title>用户登录</title>
+<title>项目信息管理系统 用户登录</title>
 
+<!-- 
+18858101357
+pf5775923
+ -->
 </head>
 
 <body>
 
 	<div id="mws-login">
-		<h1>用户登录</h1>
+		<h1>项目信息管理系统 登录</h1>
 		<div class="mws-login-lock">
 			<img src="${ctx}/static/css/icons/24/locked-2.png" alt="" />
 		</div>
@@ -26,13 +30,13 @@
 			<form id="form" class="mws-form" action="" method="post">
 				<div class="mws-form-row">
 					<div class="mws-form-item large">
-						<input type="text" name="telephone" value="18858101357"
+						<input type="text" name="telephone" 
 							class="mws-login-username mws-textinput validate[required]" placeholder="用户名" />
 					</div>
 				</div>
 				<div class="mws-form-row">
 					<div class="mws-form-item large">
-						<input type="password" name="password" value="pf5775923" 
+						<input type="password" name="password" 
 							class="mws-login-password mws-textinput validate[required]" placeholder="密码" /> <input
 							type="checkbox" name="remember" id="remember" /> <label
 							id="remember-label" for="remember" style="color: white">记住密码</label>
@@ -50,9 +54,9 @@
 
 			<p></p>
 			<p>
-				没有账号? <a href="register">注册</a>
+				
 				<p>
-					忘记密码? <a href="findpwd1">找回密码</a>
+					
 				</p>
 		</div>
 	</div>

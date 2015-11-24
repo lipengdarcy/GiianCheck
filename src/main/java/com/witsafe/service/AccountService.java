@@ -95,6 +95,17 @@ public class AccountService {
 	}
 
 	/**
+	 * 根据id查询项目结果
+	 * 
+	 * @param id
+	 *            项目结果id
+	 * @return 项目结果列表
+	 */
+	public ProjectResult selectProjectResultById(Integer id) {
+		return projectResultMapper.selectByPrimaryKey(id);
+	}
+	
+	/**
 	 * 根据项目id查询项目结果
 	 * 
 	 * @param id

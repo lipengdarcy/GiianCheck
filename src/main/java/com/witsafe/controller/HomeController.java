@@ -73,19 +73,31 @@ public class HomeController {
 	 * 项目结果展示
 	 */
 	@RequestMapping(value = "/getProjectResult", method = RequestMethod.GET)
-	public String getProjectResult(ModelMap m, Integer projectid,
-			Integer quarterid) {
+	public String getProjectResult(ModelMap m, ProjectResult result) {
 		List<ProjectResultExt> list = null;
-		if (projectid != null) {
-			if (quarterid != null)
-				list = accountService.selectProjectResult(projectid, quarterid);
+		if (result.getProjectid() != null) {
+			if (result.getQuarterid() != null)
+				list = accountService.selectProjectResult(result.getProjectid(), result.getQuarterid());
 			else
-				list = accountService.selectProjectResult(projectid);
+				list = accountService.selectProjectResult(result.getProjectid());
 		}
 		m.put("projectResultList", list);
-		m.put("projectid", projectid);
-		m.put("quarterid", quarterid);
+		m.put("projectid", result.getProjectid());
+		m.put("quarterid", result.getQuarterid());
 		return "home/projectresult";
+	}
+	
+	/**
+	 * 项目结果详情（编辑）
+	 */
+	@RequestMapping(value = "/getProjectResultDetail", method = RequestMethod.GET)
+	public String getProjectResultDetail(ModelMap m, Integer id) {
+		ProjectResult result = null;
+		if (id != null) {
+			result = accountService.selectProjectResultById(id);			
+		}
+		m.put("projectResult", result);
+		return "home/projectresultdetail";
 	}
 
 	/**
@@ -100,6 +112,8 @@ public class HomeController {
 
 		ResponseData<Integer> data = new ResponseData<Integer>();
 		try {
+			if(record.getQuarterid()==null)
+				record.setQuarterid(0);
 			int count = accountService.updateProjectResult(record);
 			data.setState("success");
 			data.setContent("更新成功！");

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/includes/commons/taglibs.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -7,7 +7,7 @@
 
 <script type="text/javascript" src="js/demo.formelements.js"></script>
 
-<title>职业卫生监测管理平台</title>
+<title>建安检测项目信息管理系统</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
 				<!--1.待办任务 begin -->
 				<div class="mws-panel grid_8">
 					<div class="mws-panel-header">
-						<span class="mws-i-24 i-table-1">待办任务 </span>
+						<span class="mws-i-24 i-table-1">项目信息列表 </span>
 					</div>
 					<div class="mws-panel-body">
 						<table class="mws-datatable-fn mws-table">
@@ -37,7 +37,7 @@
 									<th>项目名称</th>
 									<th>设备数量</th>
 									<th>分值</th>
-									<th>合同金额</th>
+									<th>金额</th>
 									<th>委托单位</th>
 									<th>委托日期</th>
 									<th>操作</th>
@@ -65,17 +65,16 @@
 							<tbody>
 
 								<c:forEach items="${projectList}" var="item">
-									<tr class="gradeA">
+									<tr class="">
 										<td>${item.title}</td>
 										<td>${item.equipment}</td>
 										<td>${item.premind}</td>
 										<td>${item.contractamount}</td>
 										<td>${item.tocompany}</td>
 										<td><fmt:formatDate value="${item.totime}"
-												pattern="yyyy-MM-dd" /></td>
-										<td><a
-											href="${ctx}/home/getProjectStep?projectid=${item.id}">项目步骤</a>
-											<a href="${ctx}/home/getProjectResult?projectid=${item.id}">项目结果</a>
+												pattern="yyyy-MM-dd HH:mm:ss" /></td>
+										<td><a href="${ctx}/home/getProjectStep?projectid=${item.id}">项目步骤</a>||
+											<a href="${ctx}/home/getProjectResult?projectid=${item.id}&quarterid=0">项目结果</a>
 
 										</td>
 										<%-- <td>${item.no}</td> --%>
