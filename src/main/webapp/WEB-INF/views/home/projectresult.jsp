@@ -35,7 +35,7 @@
 				<!--1.待办任务 begin -->
 				<div class="mws-panel grid_8">
 					<div class="mws-panel-header">
-						<span class="mws-i-24 i-table-1">项目结果</span>
+						<span class="mws-i-24 i-table-1">项目结果&nbsp;&nbsp;&nbsp;&nbsp;<font color="red"><a href="javascript:history.go(-1);">后退</a> </font></span>
 					</div>
 					<div class="mws-panel-body">
 						<table class="mws-datatable-fn mws-table">
@@ -147,7 +147,7 @@
 			async : false,
 			success : function(data, status) {
 				//后台执行成功后的回调函数
-				if (data.state = "success") {
+				if (data.state == "success") {
 					alert(data.content);
 					//window.location.href = "${ctx}/home/getProjectResult";
 					

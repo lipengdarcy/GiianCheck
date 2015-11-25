@@ -23,11 +23,13 @@
 		<div id="mws-container" class="clearfix">
 			<!-- begin页面主体  -->
 			<div class="container">
+			
+			
 
 			<!--1.待办任务 begin -->
 				<div class="mws-panel grid_8">
 					<div class="mws-panel-header">
-						<span class="mws-i-24 i-table-1">项目步骤<font color="red">[共:${majorTotal }项]&nbsp;&nbsp;</font>
+						<span class="mws-i-24 i-table-1">项目步骤&nbsp;&nbsp;&nbsp;&nbsp;<font color="red"><a href="javascript:history.go(-1);">后退</a> </font>
 						</span>
 					</div>
 					<div class="mws-panel-body">
@@ -51,9 +53,18 @@
 
 								<c:forEach items="${projectStepList}" var="item">
 									<tr class="gradeA">
-										<td>${item.ptype}</td>
+										<td>
+										<c:if test="${item.ptype==0}" >控评</c:if>
+										<c:if test="${item.ptype==1}" >检测</c:if>
+										<c:if test="${item.ptype==2}" >个人剂量</c:if>
+										<c:if test="${item.ptype==3}" >预评</c:if>
+										<c:if test="${item.ptype==4}" >环评</c:if>
+										</td>
 										<td>${item.stepname}</td>
-										<td>${item.status}</td>
+										<td>
+										<c:if test="${item.status==0}" >进行中</c:if>
+										<c:if test="${item.status==1}" >完成</c:if>
+										</td>
 										<td><fmt:formatDate value="${item.statustime}"
 												pattern="yyyy-MM-dd" /></td>
 										<td>${item.stepdescrip}</td>

@@ -33,7 +33,7 @@
 
 				<div class="mws-panel grid_8">
 					<div class="mws-panel-header">
-						<span class="mws-i-24 i-text-styling-3">项目结果详情</span>
+						<span class="mws-i-24 i-text-styling-3">项目结果详情&nbsp;&nbsp;&nbsp;&nbsp;<font color="red"><a href="javascript:history.go(-1);">后退</a> </font></span>
 					</div>
 					<div class="mws-panel-body">
 						<form class="mws-form" id="form" action="">
@@ -115,11 +115,11 @@
 			async : false,
 			success : function(data, status) {
 				//后台执行成功后的回调函数
-				if (data.state = "success") {
+				if (data.state == "success") {
 					alert(data.content);
-					//window.location.href = "${ctx}/home/getProjectResult";
+					window.location.href = "${ctx}/home/getProjectResult?projectid=${projectResult.projectid}&quarterid=${projectResult.quarterid}";
 					
-					window.location.reload();
+					//window.location.reload();
 				} else {
 					$.jGrowl(data.content, {
 						header : "info"
@@ -134,6 +134,8 @@
 				
 			}
 		});
+		//不增加return false; 上面的跳转无效
+		return false;
 	});
 	
 	function deleteResult(id) { 

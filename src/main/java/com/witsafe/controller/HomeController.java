@@ -112,8 +112,6 @@ public class HomeController {
 
 		ResponseData<Integer> data = new ResponseData<Integer>();
 		try {
-			if(record.getQuarterid()==null)
-				record.setQuarterid(0);
 			int count = accountService.updateProjectResult(record);
 			data.setState("success");
 			data.setContent("更新成功！");
